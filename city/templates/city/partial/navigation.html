@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+{#        <button data-toggle="collapse" data-target="#navbarSupportedContent">&times;</button>#}
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav navigation-menu">
+            <li class="nav-item">
+                <a href="{% url 'city:home_page' %}" class="nav-link"><i class="fa fa-home"></i> صفحه اصلی</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'city:unique_slug' slug='گردشگری' %}" class="nav-link"><i
+                        class="fas fa-umbrella-beach"></i>گردشگری</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'city:unique_slug' slug='تاریخی-مذهبی' %}" class="nav-link"><i
+                        class="fas fa-mosque"></i>تاریخی-مذهبی</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'city:unique_slug' slug='کارخانجات' %}" class="nav-link"><i class="fa fa-industry"></i>کارخانجات</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'city:unique_slug' slug='بزرگان' %}" class="nav-link"><i
+                        class="fas fa-user-graduate"></i>بزرگان</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'city:unique_slug' slug='شهدا' %}" class="nav-link"><i class="fa fa-user"></i>شهدا</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'city:unique_slug' slug='هتل-و-رستوران' %}" class="nav-link"><i class="fa fa-hotel"></i>هتل</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'city:unique_slug' slug='رستوران' %}" class="nav-link"><i class="fa fa-cutlery"></i>رستوران</a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link"><i class="fa fa-info-circle"></i>درباره ما</a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link"><i class="fa fa-phone-square"></i>ارتباط با ما</a>
+            </li>
+        </ul>
+    </div>
+</nav>

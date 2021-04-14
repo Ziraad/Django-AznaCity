@@ -1,0 +1,21 @@
+{% extends 'city/base.html' %}
+{% load static %}
+{% block head %}{% endblock %}
+{% block title %}{{ super }} {{ place.name }} | {% endblock %}
+{% block body %}
+    <main class="main-container">
+        <div class="container category-details-container">
+            <div class="category-details-image-container">
+                <img src="{{ place.image.url }}" alt="{{ place.name }}" class="category-details-image">
+                <h1 class="category-details-name-container">{{ place.name }}</h1>
+                <p class="category-details-description-container">{{ place.description }}</p>
+            </div>
+        </div>
+    </main>
+
+
+<script src="{% static 'city/js/jquery-3.5.1.min.js' %}"></script>
+  <script src="{% static 'city/js/popper.min.js' %}"></script>
+  <script src="{% static 'city/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'city/js/script.js' %}"></script>
+{% endblock %}

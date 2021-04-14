@@ -1,0 +1,26 @@
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-cat-1">
+            <p class="footer-cat-list-title">دسترسی سریع</p>
+            <ul class="footer-cat-list">
+                {% for c in categorys %}
+                    <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="footer-cat-2">
+            <p class="footer-cat-list-title">لینک های مفید</p>
+            <ul class="footer-cat-list">
+
+                <li><a href="https://baratisafe.com">گاوصندوق</a></li>
+                <li><a href="https://baratisafe.com">گاوصندوق</a></li>
+                <li><a href="https://baratisafe.com">گاوصندوق</a></li>
+                <li><a href="https://baratisafe.com">گاوصندوق</a></li>
+
+            </ul>
+        </div>
+
+
+    </div>
+</footer>

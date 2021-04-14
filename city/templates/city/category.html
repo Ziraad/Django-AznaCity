@@ -1,0 +1,47 @@
+{% extends 'city/base.html' %}
+{% load static %}
+{% block head %}{% endblock %}
+{% block title %}{{ super }}  {{ cat_name }} | {% endblock %}
+{% block body %}
+
+    <main class="main-container container">
+        {% if cat %}
+            <h4 class="category-title ">{{ cat_name }}</h4>
+            {% if cat.image %}
+                <img class="vector-category" src="{{ cat.image.url }}" alt="{{ cat.name }}">
+            {% endif %}
+            <div class="about-category">{{ cat.body|safe }}</div>
+            <div class="all-container">
+
+
+                {% for x in cats %}
+                    <div class="category-container cat-container-page">
+                        <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                            <img src="{{ x.image.url }}" alt="{{ x.name }}" class="category-item-image">
+                            <div class="top">
+                                <h2 class="category-item-name">
+                                    {% if x.category.name == 'شهدا' %}
+                                        <span class="text-danger">شهید </span>
+                                    {% endif %}
+                                    {{ x.name }}</h2>
+                            </div>
+                            <div class="bottom">
+
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        {% else %}
+            <p class="text-dark text-center bg-warning">محتوایی برای نمایش وجود ندارد ! لطفاً دسته بندی دیگری را انتخاب
+                نمایید.</p>
+        {% endif %}
+    </main>
+
+    <script src="{% static 'city/js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'city/js/popper.min.js' %}"></script>
+    <script src="{% static 'city/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'city/js/script.js' %}"></script>
+{% endblock %}
