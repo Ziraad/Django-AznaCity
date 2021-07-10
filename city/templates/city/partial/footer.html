@@ -1,26 +1,31 @@
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-cat-1">
-            <p class="footer-cat-list-title">دسترسی سریع</p>
-            <ul class="footer-cat-list">
+<footer class="footer bg-primary">
+    <div class="footer-container flex justify-start flex-wrap font-vazir gap-16 mx-12 py-4">
+        <div class="footer-cat-1 w-50  md:w-1/6">
+            <p class="footer-cat-list-title font-bold text-gray-800 border-b-2 border-yellow-400 py-4">دسترسی سریع</p>
+            <ul class="footer-cat-list text-gray-100 mt-4">
                 {% for c in categorys %}
-                    <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+                    <li class="p-1 transition h-8 ease-in duration-200 transform hover:text-gray-800 hover:-translate-x-2">
+                        <a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
                 {% endfor %}
             </ul>
         </div>
 
-        <div class="footer-cat-2">
-            <p class="footer-cat-list-title">لینک های مفید</p>
-            <ul class="footer-cat-list">
-
-                <li><a href="https://baratisafe.com">گاوصندوق</a></li>
-                <li><a href="https://baratisafe.com">گاوصندوق</a></li>
-                <li><a href="https://baratisafe.com">گاوصندوق</a></li>
-                <li><a href="https://baratisafe.com">گاوصندوق</a></li>
-
+        <div class="footer-cat-2 w-50 md:w-1/6">
+            <p class="footer-cat-list-title font-bold text-gray-800 border-b-2 border-yellow-400 py-4">لینک های مفید</p>
+            <ul class="footer-cat-list text-gray-100 mt-4">
+                <li class="p-1 transition ease-in duration-200 transform hover:text-gray-800 hover:-translate-x-2"><a
+                        href="#">شهرداری ازنا</a></li>
+                <li class="p-1 transition ease-in duration-200 transform hover:text-gray-800 hover:-translate-x-2"><a
+                        href="#">ازنا خبر</a></li>
+                <li class="p-1 transition ease-in duration-200 transform hover:text-gray-800 hover:-translate-x-2"><a
+                        href="#">استانداری</a></li>
+                <li class="p-1 transition ease-in duration-200 transform hover:text-gray-800 hover:-translate-x-2"><a
+                        href="https://baratisafe.com">گاوصندوق</a></li>
             </ul>
         </div>
-
-
     </div>
+<div class="py-4 text-right mx-12">
+    <span class="font-vazir text-sm text-gray-200">فیلمها و تصاویر خود را با موضوع مرتبط با شهرستان ازنا به آی دی تلگرام DiyareAzna@ ارسال نمایید.</span>
+</div>
+    <div class="h-12 bg-gray-800 p-2 text-center"><span class="font-vazir text-sm text-gray-100 flex justify-center">تمامی حقوق متعلق به سایت دیار ازنا می باشد . استفاده از مطالب سایت با ذکر منبع بلامانع است.</span></div>
 </footer>

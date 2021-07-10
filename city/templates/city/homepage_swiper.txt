@@ -1,0 +1,114 @@
+{% for c in categorys %}
+                <div class="main-content-part w-full h-96 flex flex-col bg-blue-300 border-b-2 border-yellow-400 font-yekan py-4">
+                    <div class="mx-auto md:max-w-screen-lg px-4">
+                        <div class="header-category container flex justify-between">
+                            <h4 class="category-title text-gray-800">{{ c.name }}</h4>
+                            <a class="view-all-category-link text-gray-600" href="{{ c.get_absolute_url }}">مشاهده همه<span
+                                    class="mr-1">>></span></a>
+                        </div>
+                        <div class="btn-pn text-left text-gray-800 my-4 container">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 border border-gray-400 inline-block transition ease-in duration-150 hover:bg-deepskyblue" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="h-8 w-8 border border-gray-400 inline-block transition ease-in duration-150 hover:bg-deepskyblue"
+                                 viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+
+                        <div class="swiper-container swiper-view container">
+                            <div class="swiper-wrapper">
+                                {% for x in places %}
+                                    {% if x.category == c %}
+                                        <div class="swiper-slide">
+                                            <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                                <img src="{{ x.image.url }}" alt="{{ x.name }}"
+                                                     class="category-item-image">
+                                                <div class="top">
+                                                    <h2 class="category-item-name">{{ x.name }}</h2>
+                                                </div>
+                                                <div class="bottom">
+                                                    <p class="category-item-des text-justify">{{ x.description|truncatewords:10|safe|escape }}</p>
+                                                    <span>...</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for x in hotel %}
+                                    {% if x.category == c %}
+                                        <div class="swiper-slide">
+                                            <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                                <img src="{{ x.image.url }}" alt="{{ x.name }}"
+                                                     class="category-item-image text-center">
+                                                <div class="title-person">
+                                                    <h3 class="category-item-name"><span
+                                                            class="text-danger"></span>{{ x.name }}</h3>
+                                                </div>
+                                                <div class="down">
+                                                    <div class="d-inline-block"><p>آدرس:</p><h6>{{ x.address }}</h6>
+                                                    </div>
+                                                    <div class="d-inline-block"><p>تلفن تماس:</p><h6
+                                                            class="text-secondary">{{ x.phone }}</h6></div>
+                                                </div>
+                                                <div class="bottom">
+
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for x in soghats %}
+                                    {% if x.category == c %}
+                                        <div class="swiper-slide">
+                                            <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                                <img src="{{ x.image.url }}" alt="{{ x.name }}"
+                                                     class="category-item-image">
+                                                <div class="top">
+                                                    <h3 class="category-item-name">{{ x.name }}</h3>
+                                                </div>
+                                                <div class="bottom">
+
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for x in martyrs %}
+                                    {% if x.category == c %}
+                                        <div class="swiper-slide">
+                                            <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                                <img src="{{ x.image.url }}" alt="{{ x.filename }}"
+                                                     class="category-item-image text-center">
+                                                <div class="title-person">
+                                                    <h3 class="category-item-name"><span
+                                                            class="text-danger">شهید</span>{{ x.fullname }}</h3>
+                                                </div>
+                                                <div class="down">
+                                                    <h6 class="">{{ x.place_of_death }}</h6>
+                                                    <h6 class="text-danger">{{ x.date_of_death }}</h6>
+                                                </div>
+                                                <div class="bottom">
+
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {#                <div class="category-desc-container container">#}
+                {#                    <p class="about-category">{{ c.body|safe }}</p>#}
+                {#                </div>#}
+            {% endfor %}

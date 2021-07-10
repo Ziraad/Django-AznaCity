@@ -1,0 +1,189 @@
+{% extends 'city/base.html' %}
+{% load static %}
+{% block head %}{% endblock %}
+{% block title %}{{ super }}{% endblock %}
+{% block body %}
+    <main class="main-container">
+        <div class="main-content">
+             <div class="mx-auto font-yekan md:max-w-screen-lg px-4 my-8 md:px-1">
+                <h2 class="text-xl text-gray-800 font-bold">درباره ازنا</h2>
+                <p class="text-gray-700 text-justify leading-8 mt-4">ازنا یکی از شهرهای استان لرستان واقع در خاور این
+                    استان است که به پایتخت طبیعت لرستان معروف است به
+                    گونه ای که شهرستان ازنا یک اکو سیستم طبیعی است و بیش از ۳ هزار نقطه گردشگری دارد. این شهر مرکز
+                    شهرستان ازنا است و بین شهرهای الیگودرز، دورود، اراک، خمین و شازند قرار گرفته‌است. ازنا درگذشته بخشی
+                    از استان مرکزی بود و در دومین تقسیمات کشوری در ۱۶ آبان سال ۱۳۱۶ در حوزه لرستان قرار گرفت. این شهردر
+                    سال ۱۳۱۷ به دهستان و در سال ۱۳۳۰ به شهر ارتقاء پیدا کرد و دارای شهرداری شد. در سال ۱۳۴۰ ازنا به
+                    عنوان مرکز بخش جاپلق در حوزه شهرستان الیگودرز ارتقاء پیدا نمود. درسال ۱۳۷۳ با تأسیس فرمانداری توسط
+                    علی محمد بشارتی وزیر کشور، این بخش از الیگودرز جدا و به شهرستان تبدیل شد و شهر ازنا مرکز آن شد. ازنا
+                    از نظر صنعتی و اقتصادی و گردشگری اهمیت دارد.</p>
+                <div class="collapse continue hidden mt-4" id="continue">
+                    <p class="text-gray-700 text-justify leading-8 transition ease-in duration-300">{{ city.about }}</p>
+                    {#              <a href="#" id='close-continue' data-toggle="collapse" data-target="#continue" onclick="return_tag()">بستن</a>#}
+                </div>
+                <div class="mt-4 text-gray-700">
+                    <a href="#" id='open-continue' data-toggle="collapse"
+                       data-target="#continue" onclick="change_name()">ادامه
+                        ...</a>
+                </div>
+
+            </div>
+            {% for c in categorys %}
+                <div class="main-content-part w-full h-96 flex flex-col bg-blue-300 border-b-2 border-yellow-400 font-yekan py-4">
+                    <div class="mx-auto md:max-w-screen-lg max-w-full px-4">
+                        <div class="header-category container flex justify-between">
+                            <h4 class="category-title text-gray-800">{{ c.name }}</h4>
+                            <a class="view-all-category-link text-gray-600" href="{{ c.get_absolute_url }}">مشاهده همه<span
+                                    class="mr-1">>></span></a>
+                        </div>
+                        <div class="btn-pn text-left text-gray-800 my-4 container">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="btn-prev h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="btn-next h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"
+                                 viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+
+                        <div class="swiper-container swiper-view container">
+                            <div class="swiper-wrapper">
+                                {% for x in places %}
+                                    {% if x.category == c %}
+                                        <div class="swiper-slide border border-gray-400 rounded-lg overflow-hidden shadow shadow-xl hover:shadow-lg transition ease-in-out duration-200">
+                                            <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                                <img src="{{ x.image.url }}" alt="{{ x.name }}"
+                                                     class="category-item-image w-full h-32">
+                                                <div class="top md:px-2 py-2 h-14">
+                                                    <h2 class="category-item-name text-gray-700 border-b text-center border-gray-500 py-2">{{ x.name }}</h2>
+                                                </div>
+                                                <div class="bottom px-4 py-2 h-14">
+                                                    <p class="category-item-des text-gray-600 text-sm text-justify">{{ x.description|truncatewords:9|safe|escape }}</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for x in hotel %}
+                                    {% if x.category == c %}
+                                        <div class="swiper-slide border border-gray-400 rounded-lg overflow-hidden  shadow hover:shadow-lg transition ease-in-out duration-200">
+                                            <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                                <img src="{{ x.image.url }}" alt="{{ x.name }}"
+                                                     class="category-item-image w-full h-32 text-center">
+                                                <div class="title-person">
+                                                    <h3 class="category-item-name"><span
+                                                            class="text-danger text-gray-700 border-b text-center border-gray-500 py-2"></span>{{ x.name }}</h3>
+                                                </div>
+                                                <div class="down">
+                                                    <div class="d-inline-block  text-gray-700 border-b text-center border-gray-500 py-2"><p>آدرس:</p><h6>{{ x.address }}</h6>
+                                                    </div>
+                                                    <div class="d-inline-block  text-gray-700 border-b text-center border-gray-500 py-2"><p>تلفن تماس:</p><h6
+                                                            class="text-secondary">{{ x.phone }}</h6></div>
+                                                </div>
+                                                <div class="bottom">
+
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for x in soghats %}
+                                    {% if x.category == c %}
+                                        <div class="swiper-slide border border-gray-400 rounded-lg overflow-hidden shadow hover:shadow-lg transition ease-in-out duration-200">
+                                            <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                                <img src="{{ x.image.url }}" alt="{{ x.name }}"
+                                                     class="category-item-image w-full h-32 text-center">
+                                                <div class="top">
+                                                    <h3 class="category-item-name text-gray-700 border-b text-center border-gray-500 py-2">{{ x.name }}</h3>
+                                                </div>
+                                                <div class="bottom px-4 py-2 h-14">
+                                                    <p class="category-item-des text-gray-600 text-sm text-justify">{{ x.description|truncatewords:9|safe|escape }}</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for x in martyrs %}
+                                    {% if x.category == c %}
+                                        <div class="swiper-slide border border-gray-400 rounded-lg overflow-hidden shadow hover:shadow-lg transition ease-in-out duration-200">
+                                            <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                                <img src="{{ x.image.url }}" alt="{{ x.filename }}"
+                                                     class="category-item-image text-center w-96 h-32 text-center">
+                                                <div class="title-person">
+                                                    <h3 class="category-item-name text-gray-700 border-b text-center border-gray-500 py-2"><span
+                                                            class="text-danger">شهید</span>{{ x.name }}</h3>
+                                                </div>
+                                                <div class="down px-4 py-2 h-14">
+                                                    <h6 class="">{{ x.place_of_death }}</h6>
+                                                    <h6 class="text-danger">{{ x.date_of_death }}</h6>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {#                <div class="category-desc-container container">#}
+                {#                    <p class="about-category">{{ c.body|safe }}</p>#}
+                {#                </div>#}
+            {% endfor %}
+
+
+            {#            <div class="main-content-tarikhi">#}
+            {#                <div class="header-place">#}
+            {#                    <h5 class="place-title">تاریخی - مذهبی</h5>#}
+            {#                    <a class="view-all-place-link" href="#">مشاهده همه<span class="mr-1">>></span></a>#}
+            {#                </div>#}
+            {#                <div class="place-container">#}
+            {#                    {% for x in tarikhi %}#}
+            {#                        <a href="#" class="place-item-link">#}
+            {#                            <img src="{{ x.image.url }}" alt="" class="place-item-image">#}
+            {#                            <div class="top">#}
+            {#                                <h6 class="place-item-name">{{ x.place_name }}</h6>#}
+            {#                            </div>#}
+            {#                            <div class="bottom">#}
+            {##}
+            {#                            </div>#}
+            {#                        </a>#}
+            {#                    {% endfor %}#}
+            {#                </div>#}
+            {#            </div>#}
+            {##}
+            {#            <div class="main-content-industrial">#}
+            {#                <div class="header-place">#}
+            {#                    <h5 class="place-title">کارخانجات</h5>#}
+            {#                    <a class="view-all-place-link" href="#">مشاهده همه<span class="mr-1">>></span></a>#}
+            {#                </div>#}
+            {#                <div class="place-container">#}
+            {#                    {% for x in karkhane %}#}
+            {#                        <a href="#" class="place-item-link">#}
+            {#                            <img src="{{ x.image.url }}" alt="" class="place-item-image">#}
+            {#                            <div class="top">#}
+            {#                                <h6 class="place-item-name">{{ x.place_name }}</h6>#}
+            {#                            </div>#}
+            {#                            <div class="bottom">#}
+            {##}
+            {#                            </div>#}
+            {#                        </a>#}
+            {#                    {% endfor %}#}
+            {#                </div>#}
+            {#            </div>#}
+
+
+        </div>
+        {#    <div class="main-side-left">#}
+        {##}
+        {#      </div>#}
+
+    </main>
+{% endblock %}

@@ -33,6 +33,8 @@ class Category(models.Model):
                                verbose_name='سردسته')
     # description = models.TextField('توضیحات', null=True, blank=True)
     image = models.ImageField(upload_to='categorys', verbose_name='عکس', null=True, blank=True)
+    icon = models.ImageField(upload_to='categorys/icon', verbose_name='آیکون', null=True, blank=True)
+    icon_name = models.CharField('نام آیکون', max_length=50, null=True, blank=True)
     body = RichTextUploadingField('توضیحات')
 
     def get_absolute_url(self):
@@ -47,11 +49,14 @@ class City(models.Model):
         verbose_name = 'شهر'
         verbose_name_plural = 'شهر'
 
-    name = models.CharField(max_length=30, verbose_name='نام شهر')
+    name = models.CharField('نام شهر', max_length=30)
     slug = models.SlugField('اسلاگ', max_length=40, allow_unicode=True, null=True)
-    about = models.TextField(verbose_name='درباره شهر', null=True, blank=True)
+    about = models.TextField('درباره شهر', null=True, blank=True)
     image = models.ImageField(upload_to='city', verbose_name='عکس', null=True, blank=True)
-    dialect = models.CharField(max_length=20, verbose_name='گویش', null=True, blank=True)
+    population = models.CharField('جمعیت', max_length=20, null=True, blank=True)
+    family = models.CharField('تعداد خانوار', max_length=20, null=True, blank=True)
+    village = models.CharField('تعداد روستاها', max_length=20, null=True, blank=True)
+    dialect = models.CharField('گویش', max_length=20, null=True, blank=True)
     # weather =
     # location =
 
@@ -64,13 +69,15 @@ class Place(models.Model):
         verbose_name = 'مکان'
         verbose_name_plural = 'مکان'
 
-    name = models.CharField(max_length=50, verbose_name='نام مکان')
+    name = models.CharField(max_length=50, verbose_name='نام مکان', null=False)
     slug = models.SlugField('اسلاگ', max_length=40, allow_unicode=True, null=True)
     description = models.TextField(verbose_name='توضیحات', null=True, blank=True)
     image = models.ImageField(upload_to='place', verbose_name='عکس', null=True, blank=True)
     # category = models.CharField(max_length=1, choices=PLACE_CATEGORY, null=True, blank=True, verbose_name='دسته بندی')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name='دسته بندی')
     # location =
+    pub_date = models.DateTimeField('تاریخ انتشار', auto_now_add=True, null=True, blank=True)
+    is_access = models.BooleanField('تأیید', default=False)
 
     def __str__(self):
         return self.name
@@ -94,12 +101,14 @@ class Soghat(models.Model):
         verbose_name = 'سوغات'
         verbose_name_plural = 'سوغات'
 
-    name = models.CharField(max_length=30, verbose_name='نام سوغات')
+    name = models.CharField(max_length=30, verbose_name='نام سوغات', null=False)
     slug = models.SlugField('اسلاگ', max_length=40, allow_unicode=True, null=True)
     description = models.TextField(verbose_name='توضیحات')
     image = models.ImageField(upload_to='soghat', verbose_name='عکس', null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name='دسته بندی')
     sub_category = models.CharField(max_length=1, choices=SOGHAT_CATEGORY, default='F', null=True, blank=True, verbose_name='زیر دسته بندی')
+    pub_date = models.DateTimeField('تاریخ انتشار', auto_now_add=True, null=True, blank=True)
+    is_access = models.BooleanField('تأیید', default=False)
 
     def __str__(self):
         return '{} - {}'.format(self.name, self.category2)
@@ -123,7 +132,7 @@ class Great(models.Model):
         verbose_name = 'بزرگان'
         verbose_name_plural = 'بزرگان'
 
-    name = models.CharField('نام و نام خانوادگی', max_length=50)
+    name = models.CharField('نام و نام خانوادگی', max_length=50, null=False)
     slug = models.SlugField('اسلاگ', max_length=50, allow_unicode=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name='دسته بندی')
     father_name = models.CharField('نام پدر', max_length=30, null=True, blank=True)
@@ -135,6 +144,8 @@ class Great(models.Model):
     description = models.TextField(verbose_name='توضیحات', null=True, blank=True)
     image = models.ImageField(upload_to='great/images', verbose_name='عکس', null=True, blank=True)
     clip = models.FileField('کلیپ', upload_to='great/clips', null=True, blank=True)
+    pub_date = models.DateTimeField('تاریخ انتشار', auto_now_add=True, null=True, blank=True)
+    is_access = models.BooleanField('تأیید', default=False)
 
     def __str__(self):
         return '{} - {}'.format(self.name, self.post)
@@ -157,7 +168,7 @@ class Martyrs(models.Model):
         verbose_name = 'شهید'
         verbose_name_plural = 'شهدا'
 
-    name = models.CharField('نام و نام خانوادگی', max_length=50)
+    name = models.CharField('نام و نام خانوادگی', max_length=50, null=False)
     slug = models.SlugField('اسلاگ', max_length=50, allow_unicode=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name='دسته بندی')
     father_name = models.CharField('نام پدر', max_length=30, null=True, blank=True)
@@ -171,6 +182,8 @@ class Martyrs(models.Model):
     will = models.TextField(verbose_name='وصیت نامه', null=True, blank=True)
     image = models.ImageField(upload_to='martyrs/images', verbose_name='عکس', null=True, blank=True)
     clip = models.FileField('کلیپ', upload_to='martyrs/clips', null=True, blank=True)
+    pub_date = models.DateTimeField('تاریخ انتشار', auto_now_add=True, null=True, blank=True)
+    is_access = models.BooleanField('تأیید', default=False)
 
     def __str__(self):
         return '{} - {} - {}'.format(self.name, self.place_of_death, self.date_of_death)
@@ -184,7 +197,7 @@ class Hotel(models.Model):
         verbose_name = 'هتل و رستوران'
         verbose_name_plural = 'هتل و رستوران'
 
-    name = models.CharField('نام', max_length=50)
+    name = models.CharField('نام', max_length=50, null=False)
     slug = models.SlugField('اسلاگ', max_length=50, allow_unicode=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name='دسته بندی')
     sub_category = models.CharField(max_length=1, choices=HOTEL_RES_CATEGORY, null=True, blank=True, verbose_name='زیر دسته بندی')
@@ -193,6 +206,8 @@ class Hotel(models.Model):
     phone = models.CharField('تلفن', max_length=11, null=True, blank=True)
     image = models.ImageField(upload_to='hotel/images', verbose_name='عکس', null=True, blank=True)
     clip = models.FileField('کلیپ', upload_to='hotel/clips', null=True, blank=True)
+    pub_date = models.DateTimeField('تاریخ انتشار', auto_now_add=True, null=True, blank=True)
+    is_access = models.BooleanField('تأیید', default=False)
 
     def __str__(self):
         return '{} - {}'.format(self.name, self.address)

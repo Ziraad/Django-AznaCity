@@ -5,44 +5,11 @@
 {% block body %}
     <main class="main-container">
         <div class="main-content">
-            {#            <div class="swiper-container swiper-first-slide">#}
-            {#                <div class="swiper-wrapper">#}
-            {#                    <div class="swiper-slide">#}
-            {#                        <img class="slide" src="{% static 'city/images/oshtrankooh2.jpg' %}" alt="دیار ازنا">#}
-            {#                    </div>#}
-            {#                    <div class="swiper-slide">#}
-            {#                        <img class="slide" src="{% static 'city/images/daretakht0.jpg' %}" alt="دیار ازنا">#}
-            {#                    </div>#}
-            {##}
-            {#                    <div class="swiper-slide">#}
-            {#                        <img class="slide" src="{% static 'city/images/azna-width-3.jpg' %}" alt="دیار ازنا">#}
-            {#                    </div>#}
-            {#                    <div class="swiper-slide">#}
-            {#                        <img class="slide" src="{% static 'city/images/gahar2.jpg' %}" alt="دیار ازنا">#}
-            {#                    </div>#}
-            {#                    <div class="swiper-slide">#}
-            {#                        <img class="slide" src="{% static 'city/images/daretakht2.jpg' %}" alt="دیار ازنا">#}
-            {#                    </div>#}
-            {#                    <div class="swiper-slide">#}
-            {#                        <img class="slide" src="{% static 'city/images/oshtrankooh1.jpg' %}" alt="دیار ازنا">#}
-            {#                    </div>#}
-            {#                    <div class="swiper-slide">#}
-            {#                        <img class="slide" src="{% static 'city/images/oshtrankooh2.jpg' %}" alt="دیار ازنا">#}
-            {#                    </div>#}
-            {#                    <div class="swiper-slide">#}
-            {#                        <img class="slide" src="{% static 'city/images/tonel1.jpg' %}" alt="دیار ازنا">#}
-            {#                    </div>#}
-            {#                </div>#}
-            {#                <!-- Add Pagination -->#}
-            {#                <div class="swiper-pagination"></div>#}
-            {#                <!-- Add Arrows -->#}
-            {#                <div class="swiper-button-next"></div>#}
-            {#                <div class="swiper-button-prev"></div>#}
-            {#            </div>#}
 
-            <div class="main-content-about container">
-                <h2 class="about-azna">درباره ازنا</h2>
-                <p>ازنا یکی از شهرهای استان لرستان واقع در خاور این استان است که به پایتخت طبیعت لرستان معروف است به
+            <div class="mx-auto font-vazir md:max-w-screen-lg px-4 md:px-2 my-8">
+                <h2 class="text-xl text-gray-800 font-bold">درباره ازنا</h2>
+                <p class="text-gray-700 text-justify leading-8 mt-4">ازنا یکی از شهرهای استان لرستان واقع در خاور این
+                    استان است که به پایتخت طبیعت لرستان معروف است به
                     گونه ای که شهرستان ازنا یک اکو سیستم طبیعی است و بیش از ۳ هزار نقطه گردشگری دارد. این شهر مرکز
                     شهرستان ازنا است و بین شهرهای الیگودرز، دورود، اراک، خمین و شازند قرار گرفته‌است. ازنا درگذشته بخشی
                     از استان مرکزی بود و در دومین تقسیمات کشوری در ۱۶ آبان سال ۱۳۱۶ در حوزه لرستان قرار گرفت. این شهردر
@@ -50,157 +17,338 @@
                     عنوان مرکز بخش جاپلق در حوزه شهرستان الیگودرز ارتقاء پیدا نمود. درسال ۱۳۷۳ با تأسیس فرمانداری توسط
                     علی محمد بشارتی وزیر کشور، این بخش از الیگودرز جدا و به شهرستان تبدیل شد و شهر ازنا مرکز آن شد. ازنا
                     از نظر صنعتی و اقتصادی و گردشگری اهمیت دارد.</p>
-                <div class="collapse" id="continue">
-                    <p>{{ city.about }}</p>
+                <div class="collapse continue hidden mt-4 transition transition-all ease-in duration-500" id="continue">
+                    <p class="text-gray-700 text-justify leading-8">{{ city.about }}</p>
                     {#              <a href="#" id='close-continue' data-toggle="collapse" data-target="#continue" onclick="return_tag()">بستن</a>#}
                 </div>
-                <a href="#" id='open-continue' data-toggle="collapse" data-target="#continue" onclick="change_name()">ادامه
-                    ...</a>
+                <div class="mt-4 text-gray-700">
+                    <a href="#" id='open-continue' data-toggle="collapse"
+                       data-target="#continue" onclick="change_name()">ادامه
+                        ...</a>
+                </div>
 
             </div>
-            {% for c in categorys %}
-                <div class="main-content-part">
-                    <div class="header-category container">
-                        <h4 class="category-title">{{ c.name }}</h4>
-                        <a class="view-all-category-link" href="{{ c.get_absolute_url }}">مشاهده همه<span
-                                class="mr-1">>></span></a>
-                    </div>
-                    <div class="btn-pn text-left container">
-                        <div class="btn-next text-center fa fa-angle-right"></div>
-                        <div class="btn-prev text-center fa fa-angle-left"></div>
-                    </div>
-
-                    <div class="swiper-container swiper-view container">
-                        <div class="swiper-wrapper">
-                            {% for x in places %}
-                                {% if x.category == c %}
-                                    <div class="swiper-slide">
-                                        <a href="{{ x.get_absolute_url }}" class="category-item-link">
-                                            <img src="{{ x.image.url }}" alt="{{ x.name }}" class="category-item-image">
-                                            <div class="top">
-                                                <h2 class="category-item-name">{{ x.name }}</h2>
-                                            </div>
-                                            <div class="bottom">
-                                                <p class="category-item-des text-justify">{{ x.description }}</p>
-                                                <span>...</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                            {% for x in hotel %}
-                                {% if x.category == c %}
-                                    <div class="swiper-slide">
+            <section class="my-8">
+                <div class="mx-auto md:max-w-screen-lg flex justify-around flex-wrap gap-4 py-16">
+                    {% for c in categorys %}
+                        <a href="{{ c.get_absolute_url }}">
+                            <div class="w-32 h-32 bg-white p-2 border-b-4 border-primary text-gray-500 hover:text-primary rounded-lg overflow-hidden transition ease-linear duration-200 transform hover:-translate-y-1 hover:border-blue-500">
+                                {% if c.icon %}<img class="mx-auto opacity-80 hover:opacity-100" src="{{ c.icon.url }}"
+                                                    alt="{{ c.name }}">{% endif %}
+                                <span class="w-full h-6 mt-4 flex justify-center text-sm mx-auto font-bold font-vazir">{{ c.name }}</span>
+                            </div>
+                        </a>
+                    {% endfor %}
+                    {#                    <div class="w-32 h-32 bg-white opacity-90 hover:opacity-100 p-2 border-b-4 border-blue-500 text-gray-500 hover:text-blue-500 rounded-lg overflow-hidden transition ease-linear duration-200 transform hover:-translate-y-1 hover:border-blue-500">#}
+                    {#                        <img class="w-16 h-16 mx-auto" src="../../static/city/images/icons/hotel.png"#}
+                    {#                             alt="travel">#}
+                    {#                        <span class="w-full h-6 mt-4 flex justify-center text-sm mx-auto font-bold font-yekan">هتل</span>#}
+                    {#                    </div>#}
+                    {#                    <div class="w-32 h-32 bg-white opacity-90 hover:opacity-100 p-2 border-b-4 border-blue-500 text-gray-500 hover:text-blue-500 rounded-lg overflow-hidden transition ease-linear duration-200 transform hover:-translate-y-1 hover:border-blue-500">#}
+                    {#                        <img class="w-16 h-16 mx-auto" src="../../static/city/images/icons/restaurant.png"#}
+                    {#                             alt="travel">#}
+                    {#                        <span class="w-full h-6 mt-4 flex justify-center text-sm mx-auto font-bold font-yekan">رستوران</span>#}
+                    {#                    </div>#}
+                    {#                    <div class="w-32 h-32 bg-white opacity-90 hover:opacity-100 p-2 border-b-4 border-blue-500 text-gray-500 hover:text-blue-500 rounded-lg overflow-hidden transition ease-linear duration-200 transform hover:-translate-y-1 hover:border-blue-500">#}
+                    {#                        <img class="w-16 h-16 mx-auto" src="../../static/city/images/icons/relagion.png"#}
+                    {#                             alt="travel">#}
+                    {#                        <span class="w-full h-6 mt-4 flex justify-center text-sm mx-auto font-bold font-yekan">تاریخی-مذهبی</span>#}
+                    {#                    </div>#}
+                    {#                    <div class="w-32 h-32 bg-white opacity-90 hover:opacity-100 p-2 border-b-4 border-blue-500 text-gray-500 hover:text-blue-500 rounded-lg overflow-hidden transition ease-linear duration-200 transform hover:-translate-y-1 hover:border-blue-500">#}
+                    {#                        <img class="w-16 h-16 mx-auto" src="../../static/city/images/icons/factory-cartoon.jpg"#}
+                    {#                             alt="travel">#}
+                    {#                        <span class="w-full h-6 mt-4 flex justify-center text-sm mx-auto font-bold font-yekan">کارخانجات</span>#}
+                    {#                    </div>#}
+                </div>
+            </section>
+            <section class="my-8">
+                <div class="main-content-part mt-16 w-full flex flex-col font-vazir py-4">
+                    <div class="mx-auto md:max-w-screen-lg max-w-full px-4">
+                        <div class="header-category container flex justify-between items-center">
+                            <a href=""><h4 class="category-title font-black text-gray-700">گردشگری</h4></a>
+                            <div class="btn-pn text-left text-gray-800 my-4 container">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="btn-prev h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="btn-next h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="swiper-container swiper-view container">
+                            <div class="swiper-wrapper">
+                                {% for x in gardesh %}
+                                    <div class="swiper-slide bg-white border-b-4 border-pink-400 rounded-lg overflow-hidden hover:shadow-lg transition ease-out duration-200">
                                         <a href="{{ x.get_absolute_url }}" class="category-item-link">
                                             <img src="{{ x.image.url }}" alt="{{ x.name }}"
-                                                 class="category-item-image text-center">
-                                            <div class="title-person">
-                                                <h3 class="category-item-name"><span
-                                                        class="text-danger"></span>{{ x.name }}</h3>
-                                            </div>
-                                            <div class="down">
-                                                <div class="d-inline-block"><p>آدرس:</p><h6>{{ x.address }}</h6></div>
-                                                <div class="d-inline-block"><p>تلفن تماس:</p><h6
-                                                        class="text-secondary">{{ x.phone }}</h6></div>
-                                            </div>
-                                            <div class="bottom">
-
-                                            </div>
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                            {% for x in soghats %}
-                                {% if x.category == c %}
-                                    <div class="swiper-slide">
-                                        <a href="{{ x.get_absolute_url }}" class="category-item-link">
-                                            <img src="{{ x.image.url }}" alt="{{ x.name }}" class="category-item-image">
-                                            <div class="top">
-                                                <h3 class="category-item-name">{{ x.name }}</h3>
-                                            </div>
-                                            <div class="bottom">
-
+                                                 class="category-item-image w-full h-32">
+                                            <div class="md:px-2 flex justify-between items-center py-2">
+                                                <h2 class="category-item-name text-gray-700 text-center ml-auto">{{ x.name }}</h2>
+                                                <span class="num-view ml-1 mt-1 font-yekan text-sm text-gray-400">4</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     class="h-5 w-5 text-gray-400 ml-2"
+                                                     viewBox="0 0 20 20"
+                                                     fill="currentColor">
+                                                    <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+                                                    <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+                                                </svg>
+                                                <span class="num-view ml-1 mt-1 font-yekan text-sm text-gray-400">10</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400"
+                                                     viewBox="0 0 20 20"
+                                                     fill="currentColor">
+                                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                                    <path fill-rule="evenodd"
+                                                          d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                                          clip-rule="evenodd"></path>
+                                                </svg>
                                             </div>
                                         </a>
                                     </div>
-                                {% endif %}
-                            {% endfor %}
-                            {% for x in martyrs %}
-                                {% if x.category == c %}
-                                    <div class="swiper-slide">
-                                        <a href="{{ x.get_absolute_url }}" class="category-item-link">
-                                            <img src="{{ x.image.url }}" alt="{{ x.filename }}"
-                                                 class="category-item-image text-center">
-                                            <div class="title-person">
-                                                <h3 class="category-item-name"><span
-                                                        class="text-danger">شهید</span>{{ x.fullname }}</h3>
-                                            </div>
-                                            <div class="down">
-                                                <h6 class="">{{ x.place_of_death }}</h6>
-                                                <h6 class="text-danger">{{ x.date_of_death }}</h6>
-                                            </div>
-                                            <div class="bottom">
-
-                                            </div>
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
-                {#                <div class="category-desc-container container">#}
-                {#                    <p class="about-category">{{ c.body|safe }}</p>#}
+                <div class="main-content-part mt-16 w-full flex flex-col font-vazir py-4">
+                    <div class="mx-auto md:max-w-screen-lg max-w-full px-4">
+                        <div class="header-category container flex justify-between items-center">
+                            <a href=""><h4 class="category-title font-black text-gray-700">هتل</h4></a>
+                            <div class="btn-pn text-left text-gray-800 my-4 container">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="btn-prev h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="btn-next h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="swiper-container swiper-view container">
+                            <div class="swiper-wrapper">
+                                {% for x in hotel %}
+                                    <div class="swiper-slide bg-white border-b-4 border-pink-400 rounded-lg overflow-hidden transition ease-in-out duration-200 hover:shadow-lg">
+                                        <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                            <img src="{{ x.image.url }}" alt="{{ x.name }}"
+                                                 class="category-item-image w-full h-32 text-center">
+                                            <div class="md:px-2 flex justify-between items-center py-2">
+                                                <h2 class="category-item-name text-gray-700 text-center ml-auto">{{ x.name }}</h2>
+                                                <span class="num-view ml-1 mt-1 font-yekan text-sm text-gray-400">4</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     class="h-5 w-5 text-gray-400 ml-2"
+                                                     viewBox="0 0 20 20"
+                                                     fill="currentColor">
+                                                    <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+                                                    <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+                                                </svg>
+                                                <span class="num-view ml-1 mt-1 font-yekan text-sm text-gray-400">10</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400"
+                                                     viewBox="0 0 20 20"
+                                                     fill="currentColor">
+                                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                                    <path fill-rule="evenodd"
+                                                          d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                                          clip-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-content-part mt-16 w-full flex flex-col font-vazir py-4">
+                    <div class="mx-auto md:max-w-screen-lg max-w-full px-4">
+                        <div class="header-category container flex justify-between items-center">
+                            <a href=""><h4 class="category-title font-black text-gray-700">سوغات</h4></a>
+                            <div class="btn-pn text-left text-gray-800 my-4 container">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="btn-prev h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="btn-next h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="swiper-container swiper-view container">
+                            <div class="swiper-wrapper">
+                                {% for x in soghats %}
+                                    <div class="swiper-slide bg-white border-b-4 border-pink-400 rounded-lg overflow-hidden transition ease-in-out duration-200 hover:shadow-lg">
+                                        <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                            <img src="{{ x.image.url }}" alt="{{ x.name }}"
+                                                 class="category-item-image w-full h-32 text-center">
+                                            <div class="md:px-2 flex justify-between items-center py-2">
+                                                <h2 class="category-item-name text-gray-700 text-center ml-auto">{{ x.name }}</h2>
+                                                <span class="num-view ml-1 mt-1 font-yekan text-sm text-gray-400">4</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     class="h-5 w-5 text-gray-400 ml-2"
+                                                     viewBox="0 0 20 20"
+                                                     fill="currentColor">
+                                                    <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+                                                    <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+                                                </svg>
+                                                <span class="num-view ml-1 mt-1 font-yekan text-sm text-gray-400">10</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400"
+                                                     viewBox="0 0 20 20"
+                                                     fill="currentColor">
+                                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                                    <path fill-rule="evenodd"
+                                                          d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                                          clip-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-content-part mt-16 w-full flex flex-col font-vazir py-4">
+                    <div class="mx-auto md:max-w-screen-lg max-w-full px-4">
+                        <div class="header-category container flex justify-between items-center">
+                            <a href=""><h4 class="category-title font-black text-gray-700">کارخانجات</h4></a>
+                            <div class="btn-pn text-left text-gray-800 my-4 container">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="btn-prev h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="btn-next h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="swiper-container swiper-view container">
+                            <div class="swiper-wrapper">
+                                {% for x in karkhane %}
+                                    <div class="swiper-slide bg-white border-b-4 border-pink-400 rounded-lg overflow-hidden transition ease-in-out duration-200 hover:shadow-lg">
+                                        <a href="{{ x.get_absolute_url }}" class="category-item-link">
+                                            <img src="{{ x.image.url }}" alt="{{ x.name }}"
+                                                 class="category-item-image w-full h-32 text-center">
+                                            <div class="md:px-2 flex justify-between items-center py-2">
+                                                <h2 class="category-item-name text-gray-700 text-center ml-auto">{{ x.name }}</h2>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {#                <div class="main-content-part mt-16 w-full flex flex-col font-yekan py-4">#}
+                {#                    <div class="mx-auto md:max-w-screen-lg max-w-full px-4">#}
+                {#                        <div class="header-category container flex justify-between items-center">#}
+                {#                            <a href=""><h4 class="category-title font-black text-gray-700">شهدا</h4></a>#}
+                {#                            <div class="btn-pn text-left text-gray-800 my-4 container">#}
+                {#                                <svg xmlns="http://www.w3.org/2000/svg"#}
+                {#                                     class="btn-prev h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"#}
+                {#                                     viewBox="0 0 20 20"#}
+                {#                                     fill="currentColor">#}
+                {#                                    <path fill-rule="evenodd"#}
+                {#                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"#}
+                {#                                          clip-rule="evenodd"></path>#}
+                {#                                </svg>#}
+                {#                                <svg xmlns="http://www.w3.org/2000/svg"#}
+                {#                                     class="btn-next h-8 w-8 border border-gray-400 inline-block cursor-pointer transition ease-in duration-150 hover:bg-deepskyblue"#}
+                {#                                     viewBox="0 0 20 20"#}
+                {#                                     fill="currentColor">#}
+                {#                                    <path fill-rule="evenodd"#}
+                {#                                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"#}
+                {#                                          clip-rule="evenodd"></path>#}
+                {#                                </svg>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                        <div class="swiper-container swiper-view container">#}
+                {#                            <div class="swiper-wrapper">#}
+                {#                                {% for x in martyrs %}#}
+                {#                                    <div class="swiper-slide bg-white border-b-4 border-pink-400 rounded-lg overflow-hidden transition ease-in-out duration-200 hover:shadow-lg">#}
+                {#                                        <a href="{{ x.get_absolute_url }}" class="category-item-link">#}
+                {#                                            <img src="{{ x.image.url }}" alt="{{ x.name }}"#}
+                {#                                                 class="category-item-image w-full h-32 text-center">#}
+                {#                                            <div class="md:px-2 flex justify-between items-center py-2">#}
+                {#                                                <h2 class="category-item-name text-gray-700 text-center ml-auto">#}
+                {#                                                    <span class="text-red-700">شهید </span>#}
+                {#                                                    {{ x.name }}#}
+                {#                                                </h2>#}
+                {#                                            </div>#}
+                {#                                        </a>#}
+                {#                                    </div>#}
+                {#                                {% endfor %}#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
                 {#                </div>#}
-            {% endfor %}
-
-
-            {#            <div class="main-content-tarikhi">#}
-            {#                <div class="header-place">#}
-            {#                    <h5 class="place-title">تاریخی - مذهبی</h5>#}
-            {#                    <a class="view-all-place-link" href="#">مشاهده همه<span class="mr-1">>></span></a>#}
-            {#                </div>#}
-            {#                <div class="place-container">#}
-            {#                    {% for x in tarikhi %}#}
-            {#                        <a href="#" class="place-item-link">#}
-            {#                            <img src="{{ x.image.url }}" alt="" class="place-item-image">#}
-            {#                            <div class="top">#}
-            {#                                <h6 class="place-item-name">{{ x.place_name }}</h6>#}
-            {#                            </div>#}
-            {#                            <div class="bottom">#}
-            {##}
-            {#                            </div>#}
-            {#                        </a>#}
-            {#                    {% endfor %}#}
-            {#                </div>#}
-            {#            </div>#}
-            {##}
-            {#            <div class="main-content-industrial">#}
-            {#                <div class="header-place">#}
-            {#                    <h5 class="place-title">کارخانجات</h5>#}
-            {#                    <a class="view-all-place-link" href="#">مشاهده همه<span class="mr-1">>></span></a>#}
-            {#                </div>#}
-            {#                <div class="place-container">#}
-            {#                    {% for x in karkhane %}#}
-            {#                        <a href="#" class="place-item-link">#}
-            {#                            <img src="{{ x.image.url }}" alt="" class="place-item-image">#}
-            {#                            <div class="top">#}
-            {#                                <h6 class="place-item-name">{{ x.place_name }}</h6>#}
-            {#                            </div>#}
-            {#                            <div class="bottom">#}
-            {##}
-            {#                            </div>#}
-            {#                        </a>#}
-            {#                    {% endfor %}#}
-            {#                </div>#}
-            {#            </div>#}
+            </section>
+            <section class="py-8">
+                <div class="w-full py-8 mx-auto flex justify-center items-center gap-8 flex-wrap">
+                    <div class="w-44 h-44 font-vazir rounded-full bg-primary p-4 flex flex-col gap-4 justify-center items-center">
+                        <div>
+                            <span class="text-gray-800 font-black">جمعیت</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-700">{{ city.population }} نفر</span>
+                        </div>
+                    </div>
+                    <div class="w-44 h-44 font-yekan rounded-full bg-primary p-4 flex flex-col gap-4 justify-center items-center">
+                        <div>
+                            <span class="text-gray-800 font-black">تعداد خانوار</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-700">{{ city.family }}</span>
+                        </div>
+                    </div>
+                    <div class="w-44 h-44 font-yekan rounded-full bg-primary p-4 flex flex-col gap-4 justify-center items-center">
+                        <div>
+                            <span class="text-gray-800 font-black">تعداد روستاها</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-700">{{ city.village }}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
 
         </div>
-        {#    <div class="main-side-left">#}
-        {##}
-        {#      </div>#}
-
     </main>
 {% endblock %}

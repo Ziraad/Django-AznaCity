@@ -1,0 +1,23 @@
+{% extends 'city/base.html' %}
+{% load static %}
+{% block head %}{% endblock %}
+{% block title %}{{ super }}  |اضافه کردن به {% endblock %}
+{% block body %}
+
+    <main class="main-container md:max-w-screen-lg mx-auto px-2 my-8 font-vazir">
+        <div class="border border-gray-200 rounded bg-white">
+            <div class="border-b border-gray-200 bg-gray-400 px-3 py-4"><span>اضافه کردن به {{ slug }}</span></div>
+            <form action="" method="post" class="flex flex-col gap-8 p-4 text-primary font-bold" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ add_form.as_p }}
+                {{ add_form.media }}
+                <button type="submit" class="w-20 h-10 my-8  font-bold bg-yellow-400 text-gray-800 rounded">ثبت</button>
+            </form>
+        </div>
+{#        {% if error_form %}#}
+{#            <div class="w-full rounded p-4 bg-red-300 my-8">#}
+{#                <span class="text-white font-bold text-sm">{{ error_form }}</span>#}
+{#            </div>#}
+{#        {% endif %}#}
+    </main>
+{% endblock %}

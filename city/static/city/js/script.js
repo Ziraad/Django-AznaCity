@@ -7,61 +7,66 @@ var i;
 var open = document.getElementById('open-continue')
 var close = document.getElementById("continue")
 var desc = document.getElementById("category-item-des")
-// Start Fixed Navbar----------------------------------------------------
-var fixmeTop = $('.navbar').offset().top;       // get initial position of the element
-//
-$(window).scroll(function () {                  // assign scroll event listener
 
-    var currentScroll = $(window).scrollTop(); // get current position
-
-    if (currentScroll > fixmeTop) {           // apply position: fixed if you
-        $('.navbar').css({                      // scroll to that element or below it
-            position: 'fixed',
-            top: '0',
-            left: '0',
-            right: '0',
-            zIndex: '100',
-            backgroundColor: '#0099ff'
-
-        });
-        // $('.navbar').css({                      // scroll to that element or below it
-        //     marginTop: '10px',
-        // });
-        // $('.signing').css({                      // scroll to that element or below it
-        //     marginTop: '20px',
-        // });
-        // $('.container-search-bar').css({                      // scroll to that element or below it
-        //     bottom: '-10px',
-        // });
-    } else {                                   // apply position: static
-        $('.navbar').css({                      // if you scroll above it
-            position: 'static',
-        });
-        // $('.navbar').css({                      // scroll to that element or below it
-        //     marginTop: '10px',
-        // });
-        // $('.container-search-bar').css({                      // scroll to that element or below it
-        //     marginTop: '0',
-        // });
-        // $('.signing').css({                      // scroll to that element or below it
-        //     marginTop: '40px',
-        // });
+open.addEventListener('click', () =>{
+    if (close.classList.contains('hidden')){
+        close.classList.remove('hidden');
+    }else{
+        close.classList.add('hidden');
     }
+})
 
-});
+// Start Fixed Navbar----------------------------------------------------
+// var fixmeTop = $('.navbar').offset().top;       // get initial position of the element
+// //
+// $(window).scroll(function () {                  // assign scroll event listener
+//
+//     var currentScroll = $(window).scrollTop(); // get current position
+//
+//     if (currentScroll > fixmeTop) {           // apply position: fixed if you
+//         $('.navbar').css({                      // scroll to that element or below it
+//             position: 'fixed',
+//             top: '0',
+//             left: '0',
+//             right: '0',
+//             zIndex: '100',
+//             backgroundColor: '#0099ff'
+//
+//         });
+//         // $('.navbar').css({                      // scroll to that element or below it
+//         //     marginTop: '10px',
+//         // });
+//         // $('.signing').css({                      // scroll to that element or below it
+//         //     marginTop: '20px',
+//         // });
+//         // $('.container-search-bar').css({                      // scroll to that element or below it
+//         //     bottom: '-10px',
+//         // });
+//     } else {                                   // apply position: static
+//         $('.navbar').css({                      // if you scroll above it
+//             position: 'static',
+//         });
+//         // $('.navbar').css({                      // scroll to that element or below it
+//         //     marginTop: '10px',
+//         // });
+//         // $('.container-search-bar').css({                      // scroll to that element or below it
+//         //     marginTop: '0',
+//         // });
+//         // $('.signing').css({                      // scroll to that element or below it
+//         //     marginTop: '40px',
+//         // });
+//     }
+//
+// });
 
 // End Fixed Navbar-----------------------------------------------------
 var swiper2 = new Swiper('.swiper-view', {
+
     breakpoints: {
-        300: {
-            slidesPerView: 1,
-            spaceBetween: 20
-        },
         480: {
-            slidesPerView: 1,
-            spaceBetween: 20
+            slidesPerView: 1
         },
-        768: {
+        640: {
             slidesPerView: 2,
             spaceBetween: 30
         },
@@ -70,17 +75,17 @@ var swiper2 = new Swiper('.swiper-view', {
             spaceBetween: 15
         },
         1200: {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 10
         },
         1600: {
-            slidesPerView: 6,
+            slidesPerView: 4,
             spaceBetween: 10
         },
     },
-    slidesPerView: 4,
-    spaceBetween: 5,
-    // slidesPerGroup: 3,
+    // slidesPerView: 4,
+    // spaceBetween: 5,
+    // // slidesPerGroup: 3,
     loop: true,
     loopFillGroupWithBlank: true,
     pagination: {
