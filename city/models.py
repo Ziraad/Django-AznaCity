@@ -2,6 +2,9 @@ from django.db import models
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
 
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
+
 PLACE_CATEGORY = (
     ('H', 'تاریخی'),
     ('M', 'مذهبی'),
@@ -19,6 +22,13 @@ HOTEL_RES_CATEGORY = (
     ('H', 'هتل'),
     ('R', 'رستوران'),
 )
+
+
+class IpClass(models.Model):
+    ip = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.ip
 
 
 class Category(models.Model):
@@ -57,6 +67,7 @@ class City(models.Model):
     family = models.CharField('تعداد خانوار', max_length=20, null=True, blank=True)
     village = models.CharField('تعداد روستاها', max_length=20, null=True, blank=True)
     dialect = models.CharField('گویش', max_length=20, null=True, blank=True)
+
     # weather =
     # location =
 
@@ -75,8 +86,10 @@ class Place(models.Model):
     image = models.ImageField(upload_to='place', verbose_name='عکس', null=True, blank=True)
     # category = models.CharField(max_length=1, choices=PLACE_CATEGORY, null=True, blank=True, verbose_name='دسته بندی')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name='دسته بندی')
+    comments = GenericRelation('Comment')
     # location =
     pub_date = models.DateTimeField('تاریخ انتشار', auto_now_add=True, null=True, blank=True)
+    views = models.ManyToManyField(IpClass, related_name='place_views', verbose_name='نمایش', blank=True)
     is_access = models.BooleanField('تأیید', default=False)
 
     def __str__(self):
@@ -84,6 +97,9 @@ class Place(models.Model):
 
     def get_absolute_url(self):
         return reverse('city:place_details', args=[self.slug])
+
+    def total_views(self):
+        return self.views.count()
 
 
 class PlaceImages(models.Model):
@@ -106,15 +122,21 @@ class Soghat(models.Model):
     description = models.TextField(verbose_name='توضیحات')
     image = models.ImageField(upload_to='soghat', verbose_name='عکس', null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name='دسته بندی')
-    sub_category = models.CharField(max_length=1, choices=SOGHAT_CATEGORY, default='F', null=True, blank=True, verbose_name='زیر دسته بندی')
+    sub_category = models.CharField(max_length=1, choices=SOGHAT_CATEGORY, default='F', null=True, blank=True,
+                                    verbose_name='زیر دسته بندی')
     pub_date = models.DateTimeField('تاریخ انتشار', auto_now_add=True, null=True, blank=True)
     is_access = models.BooleanField('تأیید', default=False)
+    views = models.ManyToManyField(IpClass, related_name='soghat_views', verbose_name='نمایش', blank=True)
+    comments = GenericRelation('Comment')
 
     def __str__(self):
-        return '{} - {}'.format(self.name, self.category2)
+        return '{} - {}'.format(self.name, self.sub_category)
 
     def get_absolute_url(self):
         return reverse('city:place_details', args=[self.slug])
+
+    def total_views(self):
+        return self.views.count()
 
 
 class SoghatImages(models.Model):
@@ -146,9 +168,14 @@ class Great(models.Model):
     clip = models.FileField('کلیپ', upload_to='great/clips', null=True, blank=True)
     pub_date = models.DateTimeField('تاریخ انتشار', auto_now_add=True, null=True, blank=True)
     is_access = models.BooleanField('تأیید', default=False)
+    views = models.ManyToManyField(IpClass, related_name='great_views', verbose_name='نمایش', blank=True)
+    comments = GenericRelation('Comment')
 
     def __str__(self):
         return '{} - {}'.format(self.name, self.post)
+
+    def total_views(self):
+        return self.views.count()
 
     # def get_absolute_url(self):
     #     return reverse('city:great_details', args=[self.slug])
@@ -184,12 +211,17 @@ class Martyrs(models.Model):
     clip = models.FileField('کلیپ', upload_to='martyrs/clips', null=True, blank=True)
     pub_date = models.DateTimeField('تاریخ انتشار', auto_now_add=True, null=True, blank=True)
     is_access = models.BooleanField('تأیید', default=False)
+    views = models.ManyToManyField(IpClass, related_name='martyrs_views', verbose_name='نمایش', blank=True)
+    comments = GenericRelation('Comment')
 
     def __str__(self):
         return '{} - {} - {}'.format(self.name, self.place_of_death, self.date_of_death)
 
-    # def get_absolute_url(self):
-    #     return reverse('city:martyrs_details', args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('city:place_details', args=[self.slug])
+
+    def total_views(self):
+        return self.views.count()
 
 
 class Hotel(models.Model):
@@ -200,7 +232,8 @@ class Hotel(models.Model):
     name = models.CharField('نام', max_length=50, null=False)
     slug = models.SlugField('اسلاگ', max_length=50, allow_unicode=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name='دسته بندی')
-    sub_category = models.CharField(max_length=1, choices=HOTEL_RES_CATEGORY, null=True, blank=True, verbose_name='زیر دسته بندی')
+    sub_category = models.CharField(max_length=1, choices=HOTEL_RES_CATEGORY, null=True, blank=True,
+                                    verbose_name='زیر دسته بندی')
     address = models.CharField('آدرس', max_length=100, null=True, blank=True)
     description = models.TextField(verbose_name='توضیحات', null=True, blank=True)
     phone = models.CharField('تلفن', max_length=11, null=True, blank=True)
@@ -208,12 +241,17 @@ class Hotel(models.Model):
     clip = models.FileField('کلیپ', upload_to='hotel/clips', null=True, blank=True)
     pub_date = models.DateTimeField('تاریخ انتشار', auto_now_add=True, null=True, blank=True)
     is_access = models.BooleanField('تأیید', default=False)
+    views = models.ManyToManyField(IpClass, related_name='hotel_views', verbose_name='نمایش', blank=True)
+    comments = GenericRelation('Comment')
 
     def __str__(self):
         return '{} - {}'.format(self.name, self.address)
 
     def get_absolute_url(self):
         return reverse('city:place_details', args=[self.slug])
+
+    def total_views(self):
+        return self.views.count()
 
 
 class AttrHotel(models.Model):
@@ -223,3 +261,31 @@ class AttrHotel(models.Model):
 
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='نام هتل')
     attr = models.CharField('ویژگی', max_length=200)
+
+
+class Comment(models.Model):
+    class Meta:
+        verbose_name = 'نظرات'
+        verbose_name_plural = 'نظرات'
+
+    fullname = models.CharField('نام و نام خانوادگی', max_length=40)
+    email = models.EmailField('ایمیل')
+    comment = models.TextField('نظر')
+    data_add = models.DateTimeField('تاریخ انتشار', auto_now_add=True)
+    confirm = models.BooleanField('تایید', default=False)
+    likes = models.ManyToManyField(IpClass, related_name='likes', verbose_name='لایک', blank=True)
+    dislikes = models.ManyToManyField(IpClass, related_name='dislikes', verbose_name='دیسلایک', blank=True)
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, related_name='comments')
+    object_id = models.PositiveIntegerField(null=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    def __str__(self):
+        # return self.fullname
+        return '{} - {} - {}'.format(self.content_object, self.fullname, self.object_id)
+
+    def total_likes(self):
+        return self.likes.count()
+
+    def total_dislikes(self):
+        return self.dislikes.count()

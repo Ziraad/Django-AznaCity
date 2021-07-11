@@ -1,14 +1,15 @@
 from itertools import chain
 
-from django.shortcuts import render
+from django.db.models import Q
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .forms import AddForm
-from .models import City, Place, Soghat, Category, Martyrs, Hotel
-
+from .forms import AddPlaceForm, AddSoghatForm, AddHotelForm, CommentForm
+from .models import City, Place, Soghat, Category, Martyrs, Hotel, Comment, IpClass
 
 categorys = Category.objects.filter(parent=None)
+
 
 def homepage(request):
     # print(categorys)
@@ -48,15 +49,50 @@ def homepage(request):
 
 
 def place_details(request, slug):
-    list1 = [Place, Soghat, Hotel]
+
+    list1 = [Place, Soghat, Hotel, Martyrs]
     for li in list1:
-        product1 = li.objects.filter(slug=slug)
-        if product1.exists():
-            product2 = li.objects.get(slug=slug)
+        case1 = li.objects.filter(slug=slug)
+        if case1.exists():
+            case = li.objects.get(slug=slug)
+
+    ip = get_client_ip(request)
+    if not IpClass.objects.filter(ip=ip).exists():
+        IpClass.objects.create(ip=ip)
+
+    case.views.add(IpClass.objects.get(ip=ip))
+
     context = {
-        'place': product2,
+        'case': case,
         'categorys': categorys,
     }
+
+    # ******************* Start Comment *************************
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            fullname = request.POST.get('fullname')
+            email = request.POST.get('email')
+            message = request.POST.get('comment')
+            comment = Comment(content_object=case, fullname=fullname, email=email, comment=message)
+            comment.save()
+            # try:
+            #     comment = comment_form.save(commit=False)
+            #     comment.content_object = case
+            #     comment.save()
+            #     error_form = 'نظر شما با موفقیت ثبت شد.'
+            # except Exception as e:
+            #     error_form = str(e)
+            #     print('error to save: ', str(e))
+            # context['error_form'] = error_form
+    else:
+        comment_form = CommentForm()
+
+    comments = Comment.objects.filter(object_id=case.id, confirm=True)
+    context['comments'] = comments
+    context['comment_form'] = comment_form
+    # ******************* End Comment ***************************
+
     return render(request, 'city/places_details.html', context=context)
 
 
@@ -86,8 +122,17 @@ def category(request, slug):
 
 
 def add_sub_cat(request, slug):
+    context = {
+        'categorys': categorys,
+        'slug': slug,
+    }
     if request.method == 'POST':
-        add_form = AddForm(request.POST, request.FILES)
+        if slug == 'سوغات':
+            add_form = AddSoghatForm(request.POST, request.FILES)
+        elif slug == 'هتل':
+            add_form = AddHotelForm(request.POST, request.FILES)
+        else:
+            add_form = AddPlaceForm(request.POST, request.FILES)
         if add_form.is_valid():
             try:
                 new = add_form.save(commit=False)
@@ -97,15 +142,70 @@ def add_sub_cat(request, slug):
                 new.save()
                 return HttpResponseRedirect(reverse('city:unique_slug', kwargs={'slug': slug}))
             except Exception as e:
+                context['error_form'] = str(e)
                 print('error to save: ', str(e))
         else:
             print('form oninvalid')
     else:
-        add_form = AddForm()
+        if slug == 'سوغات':
+            add_form = AddSoghatForm()
+        elif Q(slug == 'هتل') | Q(slug == 'رستوران'):
+            add_form = AddHotelForm()
+        else:
+            add_form = AddPlaceForm()
 
-    context = {
-        'add_form': add_form,
-        'categorys': categorys,
-        'slug': slug,
-    }
+    context['add_form'] = add_form
+
     return render(request, 'city/add_sub_cat.html', context=context)
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+def like_post(request, pk_p, pk_c):
+    list1 = [Place, Soghat, Hotel, Martyrs]
+    for li in list1:
+        case1 = li.objects.filter(id=pk_p)
+        if case1.exists():
+            case = get_object_or_404(case1, id=pk_p)
+            print('case: ', case1)
+
+    comment = Comment.objects.get(id=request.POST.get('comment_id'))
+
+    ip = get_client_ip(request)
+
+    if not IpClass.objects.filter(ip=ip).exists():
+        IpClass.objects.create(ip=ip)
+    if comment.likes.filter(id=IpClass.objects.get(ip=ip).id).exists():
+        comment.likes.remove(IpClass.objects.get(ip=ip))
+    else:
+        comment.likes.add(IpClass.objects.get(ip=ip))
+
+    return HttpResponseRedirect(case.get_absolute_url())
+
+
+def dislike_post(request, pk_p, pk_c):
+    list1 = [Place, Soghat, Hotel, Martyrs]
+    for li in list1:
+        case1 = li.objects.filter(id=pk_p)
+        if case1.exists():
+            case = get_object_or_404(case1, id=pk_p)
+
+    comment = Comment.objects.get(id=request.POST.get('comment_id'))
+
+    ip = get_client_ip(request)
+
+    if not IpClass.objects.filter(ip=ip).exists():
+        IpClass.objects.create(ip=ip)
+    if comment.dislikes.filter(id=IpClass.objects.get(ip=ip).id).exists():
+        comment.dislikes.remove(IpClass.objects.get(ip=ip))
+    else:
+        comment.dislikes.add(IpClass.objects.get(ip=ip))
+
+    return HttpResponseRedirect(case.get_absolute_url())

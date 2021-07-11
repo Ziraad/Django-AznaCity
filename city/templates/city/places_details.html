@@ -1,27 +1,163 @@
 {% extends 'city/base.html' %}
 {% load static %}
 {% block head %}{% endblock %}
-{% block title %}{{ super }} {{ place.name }} | {% endblock %}
+{% block title %}{{ super }} {{ case.name }} | {% endblock %}
 {% block body %}
     <main class="main-container md:max-w-screen-lg mx-auto px-2 my-8 font-vazir">
         {#        <div class="container category-details-container">#}
-        <div class="category-details-image-container border border-gray-200 rounded bg-white">
+        <div class="category-details-image-container border border-gray-200 rounded bg-white my-8">
             <div class="border-b-2 border-gray-300 p-4 md:p-6 flex items-center">
-                <h1 class="category-details-name-container text-lg">{{ place.name }}</h1>
+                <h1 class="category-details-name-container text-lg">
+                    {% if case.category.name == 'شهدا' %}
+                        <span class="text-red-600">شهید </span>{% endif %}{{ case.name }}
+                </h1>
             </div>
             <div class="flex justify-center p-2 md:p-4">
-                {% if place.image %}
-                    <img class="category-details-image w-full md:h-144 rounded-lg" src="{{ place.image.url }}" alt="{{ place.name }}">
+                {% if case.image %}
+                    <img class="category-details-image w-full md:h-144 rounded-lg" src="{{ case.image.url }}"
+                         alt="{{ case.name }}">
                 {% endif %}
             </div>
-            <div class="px-4 py-2 md:py-8 flex items-center">
-                <h1 class="category-details-name-container text-lg">{{ place.name }}</h1>
+            <div class="px-4 py-2 md:py-4 flex items-center">
+                <h1 class="category-details-name-container text-lg">
+                    {% if case.category.name == 'شهدا' %}
+                        <span class="text-red-600">شهید </span>{% endif %}{{ case.name }}
+                </h1>
             </div>
-            <div class="px-4 py-2 md:py-8">
-                <p class="category-details-description-container text-justify leading-10">{{ place.description }}</p>
+            {% if case.category.name == 'شهدا' %}
+                <div class="bg-green-200 grid md:grid-cols-3 gap-12 p-4">
+                    <div class="flex flex-col gap-2">
+                        <span class="font-bold text-gray-800 ml-4">نام پدر:</span>
+                        <span class="text-gray-500">{% if case.father_name %}{{ case.father_name }}{% else %}
+                            -{% endif %}</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="font-bold text-gray-800 ml-4">تاریخ تولد:</span>
+                        <span class="text-gray-500">{% if case.date_of_birth %}{{ case.date_of_birth }}{% else %}
+                            -{% endif %}</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="font-bold text-gray-800 ml-4">محل تولد:</span>
+                        <span class="text-gray-500">{% if case.place_of_birth %}{{ case.place_of_birth }}{% else %}
+                            -{% endif %}</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="font-bold text-gray-800 ml-4">تاریخ شهادت:</span>
+                        <span class="text-gray-500">{% if case.date_of_death %}{{ case.date_of_death }}{% else %}
+                            -{% endif %}</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="font-bold text-gray-800 ml-4">محل شهادت:</span>
+                        <span class="text-gray-500">{% if case.place_of_death %}{{ case.place_of_death }}{% else %}
+                            -{% endif %}</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="font-bold text-gray-800 ml-4">عملیات:</span>
+                        <span class="text-gray-500">{% if case.operation %}{{ case.operation }}{% else %}
+                            -{% endif %}</span>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="px-4 py-2 md:py-4">
+                {% if case.biography %}
+                    <p class="category-details-description-container text-justify leading-10">{{ case.biography }} </p>
+                {% endif %}
+                <p class="category-details-description-container text-justify leading-10">{{ case.description }}</p>
+            </div>
+            {% if case.will %}
+                <div class="px-4 py-2 md:py-4">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                        <h2 class="text-gray-800 my-4 mr-2 font-bold">وصیت نامه شهید {{ case.name }}</h2>
+                    </div>
+
+                    <p class="category-details-description-container text-justify leading-10">{{ case.will }} </p>
+                </div>
+            {% endif %}
+            <div class="share-container border-t border-gray-200 p-4 flex justify-between">
+                <div><span class="text-sm text-gray-600">اشتراک گذاری</span></div>
+                <div class="flex gap-4">
+                    <a href="" class="text-gray-600 hover:text-gray-800 transition ease-linear duration-200"><i
+                            class="fa fa-telegram"></i></a>
+                    <a href="" class="text-gray-600 hover:text-gray-800 transition ease-linear duration-200"><i
+                            class="fa fa-twitter"></i></a>
+                    <a href="" class="text-gray-600 hover:text-gray-800 transition ease-linear duration-200"><i
+                            class="fa fa-facebook"></i></a>
+                </div>
             </div>
         </div>
-        {#        </div>#}
+        <div class="comment-container border border-gray-200 rounded bg-white p-4">
+            <div>
+                <span>لطفاً نظرات خود را در مورد این مطلب به اشتراک بگذارید.نظرات شما پس از تأیید توسط مدیریت به نمایش در خواهد آمد.</span>
+            </div>
+            <div class="bg-gray-200 rounded-lg my-4 p-4">
+                <form action="" method="post" class="grid md:grid-cols-2 gap-8">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <button type="submit" class="w-20 h-10 my-8 font-bold bg-yellow-400 text-gray-800 rounded">ثبت
+                    </button>
+                </form>
+            </div>
+            {% if error_form %}
+                <div class="w-full rounded p-4 bg-red-300 my-8">
+                    <span class="text-white font-bold text-sm">{{ error_form }}</span>
+                </div>
+            {% endif %}
+            <div class="bg-gray-200 rounded-lg my-4 p-4">
+                {% if comments %}
+                    {% for c in comments %}
+                        <div class="bg-white border border-gray-300 my-2 p-8 text-gray-600 font-vazir">
+                            <div class="flex">
+                                <span class="ml-4">{{ c.fullname }}</span>
+                                <span class="comment-date">{{ c.data_add }}</span>
+                            </div>
+                            <div class="comment-container p-4">
+                                <div class="comment py-4"><span>{{ c.comment | safe }}</span></div>
+                            </div>
+                            <div class="flex gap-8">
+                                <form action="{% url 'city:like_post' case.id c.id %}"
+                                      class="frm-like border-left-1 inline"
+                                      method="post" id="frm-like-{{ c.id }}" onsubmit="submitLike({{ c.id }})">
+                                    {#                                            onsubmit="submitForm({{ c.id }})"#}
+                                    {% csrf_token %}
+                                    <div class="value-like-dislike text-gray-400">
+                                        <button type="submit" class="btn btn-sm hover:text-gray-700 transition ease-in duration-200" id="like-{{ c.id }}"
+                                                name="comment_id"
+                                                value="{{ c.id }}">
+                                            <i class="fa fa-thumbs-up ml-2"></i>
+                                        </button>
+                                        <span class="total-likes font-weight-bold">{{ c.total_likes }}</span>
+                                    </div>
+                                </form>
+                                <form action="{% url 'city:dislike_post' case.id c.id %}" class="frm-dislike inline"
+                                      method="post" id="frm-dislike-{{ c.id }}"
+                                      onsubmit="submitDislike({{ c.id }})">
+                                    {% csrf_token %}
+                                    <div class="value-like-dislike text-gray-400">
+                                                <span class="font-weight-bold">{{ c.total_dislikes }}
+                                                    {% if c.total_dislikes > 0 %}-{% endif %}</span>
+                                        <button type="submit" class="btn btn-sm hover:text-gray-700 transition ease-in duration-200" id="dislike"
+                                                name="comment_id"
+                                                value="{{ c.id }}">
+                                            <i class="fa fa-thumbs-down ml-2"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="bg-yellow-300 rounded-lg p-4 flex justify-center">
+                        <span class="font-bold text-gray-700">تاکنون نظری برای این مطلب ثبت نشده است. شما اولین نفری باشید که نظر می دهد.</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </main>
 
 
@@ -29,4 +165,5 @@
     <script src="{% static 'city/js/popper.min.js' %}"></script>
     <script src="{% static 'city/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'city/js/script.js' %}"></script>
+    <script src="{% static 'city/js/com_det.js' %}"></script>
 {% endblock %}

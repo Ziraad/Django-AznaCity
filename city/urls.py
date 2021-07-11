@@ -11,4 +11,6 @@ urlpatterns = [
     # path('main/Kaveh/<slug:slug>/', views.details, name='details'),
     re_path(r'^p/(?P<slug>[-\w]+)/$', views.place_details, name='place_details'),
     re_path(r'^p/(?P<slug>[-\w]+)/add$', views.add_sub_cat, name='add_sub_cat'),
+    path('like/<int:pk_p>/<int:pk_c>/', views.like_post, name='like_post'),
+    path('dislike/<int:pk_p>/<int:pk_c>/', views.dislike_post, name='dislike_post'),
 ]

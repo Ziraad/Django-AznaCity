@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import City, Place, Soghat, Category, Martyrs, GreatServices, Great, PlaceImages, SoghatImages, AttrHotel, \
-    Hotel
+    Hotel, Comment
 
 admin.site.register(City)
 
@@ -131,6 +131,23 @@ class HotelAdmin(admin.ModelAdmin):
     def dont_approve_comments(self, request, queryset):
         result = queryset.update(is_access=False)
         self.message_user(request, '{} هتل با موفقیت تغیر یافت.'.format(result))
+
+    approve_comments.short_description = 'تأیید گزینه های انتخاب شده'
+    dont_approve_comments.short_description = 'عدم تأیید گزینه های انتخاب شده'
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['fullname', 'content_object', 'comment', 'confirm']
+    actions = ['approve_comments', 'dont_approve_comments']
+
+    def approve_comments(self, request, queryset):
+        result = queryset.update(confirm=True)
+        self.message_user(request, '{} نظر با موفقیت تغیر یافت.'.format(result))
+
+    def dont_approve_comments(self, request, queryset):
+        result = queryset.update(confirm=False)
+        self.message_user(request, '{} نظر با موفقیت تغیر یافت.'.format(result))
 
     approve_comments.short_description = 'تأیید گزینه های انتخاب شده'
     dont_approve_comments.short_description = 'عدم تأیید گزینه های انتخاب شده'
