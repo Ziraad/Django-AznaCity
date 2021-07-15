@@ -1,0 +1,46 @@
+{% extends 'city/base.html' %}
+{% load static %}
+{% load jformat %}
+{% load humanize %}
+{% block extra_headers %}
+
+{% endblock %}
+{% block title %}اضافه کردن پست {{ super }}{% endblock %}
+{% block body %}
+
+    <div class="add-news-page cryptoi-container">
+        <div class="profile-detail-container">
+            {% if error_message %}
+                <div class="submit-message-container">
+                    <div class="message {% if error_message %}negative{% endif %}">
+                        <span id="submit-message">{{ error_message }}</span>
+                    </div>
+                </div>
+            {% endif %}
+            {% include 'account/partial/_dashboard.html' %}
+
+            <div class="add-news-container">
+                <div class="title-container justify-content-center">
+                    <h4 class="title text-right mr-2">فرم اضافه کردن پست جدید</h4>
+                </div>
+                <hr>
+                <form class="form-group" action="{% url 'accounts:add_post_view' %}" method="post" id="frm-add-post"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_table }}
+                    {{ form.media }}
+                    <input type="submit" value="ثبت" class="btn btn-success submit-form  btn m-3">
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    <script>#}
+    {#        CKEDITOR.replace('text');#}
+    {#    </script>#}
+    {% block extra_body %}
+        <script src="{% static 'cryptocur/js/slugify.js' %}"></script>
+        <script src="{% static 'cryptocur/js/ckeditor.js' %}"></script>
+        <script src="{% static 'cryptocur/js/add-p.js' %}"></script>
+    {% endblock %}
+{% endblock %}
+

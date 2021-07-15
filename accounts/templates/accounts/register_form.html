@@ -1,0 +1,61 @@
+{% extends 'city/base.html' %}
+{% load static %}
+{% load jformat %}
+{% load humanize %}
+{% block extra_headers %}
+{% endblock %}
+{% block title %}ثبت نام {{ super }}{% endblock %}
+{% block body %}
+    <div class="register-page-container">
+        <div class="container-form">
+            <div class="container-form-register">
+                <form action="" method="post" name="frm_register" class="form-register">
+                    {% csrf_token %}
+                    <h5 class="title-form">ثبت نام در سایت</h5>
+                    <img src="{% static 'cryptocur/images/register.png' %}" alt="ثبت نام در سایت">
+                    <div class="tamasha">
+                        <i class="fa fa-address-card phone-icon"></i>
+                        <input type="text" name="f_name" class="form-control pr-5" placeholder="نام"
+                               style="font-size: 12px">
+                    </div>
+                    <div class="tamasha">
+                        <i class="fa fa-address-card phone-icon"></i>
+                        <input type="text" name="l_name" class="form-control pr-5" placeholder="نام خانوادگی">
+                    </div>
+                    <div class="tamasha">
+                        <i class="fa fa-envelope phone-icon"></i>
+                        <input type="email" name="email" class="form-control pr-5" placeholder="ایمیل">
+                    </div>
+                    <div class="tamasha">
+                        <i class="fa fa-mobile phone-icon" style="font-size: 20px;"></i>
+                        <input type="text" name="mobile" class="form-control pr-5" maxlength="11" placeholder="موبایل">
+                    </div>
+
+                    <div class="tamasha">
+                        <i class="fa fa-address-card phone-icon"></i>
+                        <input type="text" name="username" class="form-control pr-5" placeholder="نام کاربری"
+                               style="font-size: 12px">
+                    </div>
+                    <div class="tamasha">
+                        <i class="fa fa-key phone-icon"></i>
+                        <input type="password" name="password" class="form-control pr-5" placeholder="گذرواژه">
+                    </div>
+                    <div class="button-submit col-12 pl-0">
+                        <button type="submit" class="btn btn-primary w-25">ثبت نام</button>
+                    </div>
+
+                    <div class="other-link text-right">
+                        <a href="{% url 'accounts:login' %}"><i class="fa fa-user pl-2" style="font-size: 20px;"></i>ورود
+                            به
+                            سایت</a>
+                        {#                <a href="#"><i class="fas fa-lock pl-2" style="font-size: 20px;"></i>رمز عبور خود را فراموش کرده ام !</a>#}
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        {% if error_in_register %}
+            <div class="bg-warning w-25 m-auto">{{ error_in_register }}</div>
+        {% endif %}
+    </div>
+{% endblock %}

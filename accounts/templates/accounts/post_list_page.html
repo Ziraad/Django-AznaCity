@@ -1,0 +1,37 @@
+{#{% extends 'cryptocur/base_page.html' %}#}
+{% extends 'city/base.html' %}
+{% load static %}
+{% load jformat %}
+{% load humanize %}
+{% block extra_headers %}
+{% endblock %}
+{% block title %}پست های من{{ super }}{% endblock %}
+
+{% block body %}
+    <div class="news-list-page cryptoi-container">
+        <div class="profile-detail-container">
+            {% include 'account/partial/_dashboard.html' %}
+            <div class="news-list-container">
+                <div class="news-title-container justify-content-center">
+                    <h4 class="title text-right">لیست پست های من</h4>
+                </div>
+                <hr>
+
+                <ul class="list-group text-right mt-3">
+                    {% if post %}
+                        {% for p in post %}
+                            <li class="list-item">
+                                <a class="list-item-link" target="_blank"
+                                   href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+                                <a class="list-item-edit-link" href="{% url 'accounts:post_edit' p.slug %}">ویرایش</a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="list-item list-item-empty-post"><span>شما تاکنون هیچ پستی نداشته اید!</span></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

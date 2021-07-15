@@ -1,0 +1,33 @@
+{% load static %}
+<div class="dashboard-container">
+    <div class="details-image-container text-center">
+        {% if profile.profile_image %}
+            <img src="{{ profile.profile_image.url }}" alt="{{ profile.user.get_full_name }}"
+                 class="profile-image">
+        {% else %}
+            <img src="{% static 'cryptocur/images/profile-image.png' %}"
+                 alt="{{ profile.user.get_full_name }}" class="profile-image">
+        {% endif %}
+    </div>
+    <div class="text-center"><span>{{ user.username }}</span></div>
+    <hr>
+    {% if user.is_staff %}
+        <div class="details-work-container dash-item">
+
+            <ul class="item-list">
+                <li class="add-item"><a class="add-new-item add-news" href="{% url 'accounts:add_post_view' %}">اضافه
+                    کردن پست</a></li>
+                <li class="add-item"><a class="add-new-item add-article" href="{% url 'accounts:post_list' %}">پست های
+                    من</a></li>
+            </ul>
+        </div>
+    {% endif %}
+    <div class="profile-button text-center">
+        <a href="{% url 'accounts:profile_edit' %}">
+            <button class="btn btn-dark"><i class="fa fa-edit ml-2"></i> ویرایش نمایه</button>
+        </a>
+        <a href="#">
+            <button class="btn btn-warning"><i class="fa fa-key ml-2"></i> تغییر گذرواژه</button>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+{% extends 'city/base.html' %}
+{% load static %}
+{% load jformat %}
+{% load humanize %}
+{% block extra_headers %}
+{% endblock %}
+{% block title %}ورود کاربر {{ super }}{% endblock %}
+{% block body %}
+    <div class="login-page-container">
+        <div class="container-form">
+            <div class="container-form-login">
+                <form action="" method="post" name="frm_login" class="form-login">
+                    {% csrf_token %}
+                    <h5 class="title-form">ورود به حساب کاربری</h5>
+                    <img src="{% static 'cryptocur/images/login.png' %}" alt="ورود به حساب کاربری">
+                    {% if login_error %}
+                        <div class="alert alert-danger text-center">
+                            {{ login_error }}
+                        </div>
+                    {% endif %}
+                    <div class="tamasha">
+                        <i class="fa fa-address-card phone-icon"></i>
+                        <input type="text" name="username" class="form-control pr-5" placeholder="نام کاربری">
+                    </div>
+                    <div class="tamasha">
+                        <i class="fa fa-key phone-icon"></i>
+                        <input type="password" name="password" class="form-control pr-5" placeholder="گذرواژه">
+                    </div>
+
+                    <div class="form-group remember-me text-right mr-3">
+                        <input type="checkbox" class="checkbox-input ml-2">
+                        <label for="form-check-label ">مرا به خاطر بسپار</label>
+                    </div>
+
+                    <div class="button-submit col-12 pl-0">
+                        <button type="submit" class="btn btn-primary w-25 ">ورود</button>
+                    </div>
+
+                    <div class="other-link text-right">
+                        <a href="{% url 'accounts:register_user' %}"><i class="fa fa-user-plus pl-2"
+                                                                        style="font-size: 20px;"></i>ثبت نام</a>
+                        <a href="#"><i class="fas fa-lock-open pl-2" style="font-size: 20px;"></i>رمز عبور خود را فراموش
+                            کرده ام !</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

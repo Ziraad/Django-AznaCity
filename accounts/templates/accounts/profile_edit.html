@@ -1,0 +1,118 @@
+{% extends 'city/base.html' %}
+{% load static %}
+{% load jformat %}
+{% load humanize %}
+{% block extra_headers %}
+{% endblock %}
+{% block title %}ویرایش نمایه کاربری {{ super }}{% endblock %}
+{% block body %}
+    <div class="profile-edit-page cryptoi-container">
+        <div class="profile-edit-container">
+            <div class="news-title-container justify-content-center">
+                <h4 class="title text-right">فرم ویرایش نمایه کاربری</h4>
+            </div>
+            <form dir="rtl" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row p-3">
+                    <div class="col-10 item-details profile-items">
+                        <div class="row px-3">
+                            <div class="col-2 text-right">
+                                <small class="text-muted">
+                                    <i class="fa fa-user"></i>
+                                    نام کاربری:
+                                </small>
+                            </div>
+                            <div class="col-4 input-value">
+                                {{ user.username }}
+                            </div>
+                            <div class="col-2 pl-0 text-right">
+                                <small class="text-muted">
+                                    <i class="fa fa-clock"></i>
+                                    جنسیت:
+                                </small>
+                            </div>
+                            <div class="col-4 input-value">
+                                {{ profile_form.gender }}
+                            </div>
+                            <div class="w-100 my-1"></div>
+                            <div class="col-2 text-right">
+                                <small class="text-muted">
+                                    <i class="fa fa-address-card"></i>
+                                    نام:
+                                </small>
+                            </div>
+                            <div class="col-4 input-value">
+                                {{ user_form.first_name }}
+                            </div>
+                            <div class="col-2 pl-0 text-right">
+                                <small class="text-muted">
+                                    <i class="fa fa-address-card"></i>
+                                    نام خانوادگی:
+                                </small>
+                            </div>
+                            <div class="col-4 input-value">
+                                {{ user_form.last_name }}
+                            </div>
+                            <div class="w-100 my-1"></div>
+                            <div class="col-2 text-right">
+                                <small class="text-muted">
+                                    <i class="fa fa-envelope-open"></i>
+                                    ایمیل:
+                                </small>
+                            </div>
+                            <div class="col-4 input-value">
+                                {{ user_form.email }}
+                            </div>
+                            <div class="col-2 pl-0 text-right">
+                                <small class="text-muted">
+                                    <i class="fa fa-mobile-alt"></i>
+                                    تلفن همراه:
+                                </small>
+                            </div>
+                            <div class="col-4 input-value">
+                                {{ profile_form.mobile }}
+                            </div>
+                            <div class="w-100 my-1"></div>
+                            <div class="col-2 text-right">
+                                <small class="text-muted">
+                                    <i class="fa fa-home"></i>
+                                    آدرس:
+                                </small>
+                            </div>
+                            <div class="col-4 input-value item-text-box">
+                                {{ profile_form.address }}
+                            </div>
+                            <div class="w-100 my-1"></div>
+                            <button type="submit" class="btn btn-submit-edit-profile btn-primary">
+                                ذخیره
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-2 text-center px-3">
+                        {% if user.profile.profile_image %}
+                            <img class="profile-image" src="{{ user.profile.profile_image.url }}"
+                                 alt="{{ user.profile }}">
+                        {% endif %}
+                        <button type="button" class="btn btn-image-profile-edit mt-4"
+                                data-toggle="modal" data-target="#profile-image-modal">
+                            <i class="fa fa-image"></i>
+                        </button>
+                        <div class="modal fade" id="profile-image-modal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ profile_form.profile_image }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ذخیره
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

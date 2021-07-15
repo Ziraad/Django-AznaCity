@@ -1,0 +1,94 @@
+{% extends 'city/base.html' %}
+{% load static %}
+{% load jformat %}
+{% load humanize %}
+{% block extra_headers %}
+{% endblock %}
+{% block title %}نمایه کاربری {{ super }}{% endblock %}
+{% block body %}
+    <div class="profile-page cryptoi-container">
+        <div class="profile-detail-container">
+            {% include 'account/partial/_dashboard.html' %}
+            <div class="details-container py-3">
+                <div>
+                    <h4 class="profile-detail-title details-item">اطلاعات حساب کاربری</h4>
+                    <hr>
+                </div>
+                <div class="details-name details-item">
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-5">
+                            <small class="details-name-title text-muted"><i class="fa fa-address-card ml-2">
+                            </i>نام و نام خانوادگی :
+                            </small>
+                        </div>
+                        <div class="details-name-value col-xl-9 col-sm-6">
+                            <span>
+                                {% if profile.user.get_full_name %}{{ profile.user.get_full_name }}
+                                {% else %}{{ profile.user.username }}{% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-birth_day details-item">
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-5">
+                            <small class="details-name-title text-muted"><i class="fa fa-birthday-cake ml-2"> </i>تاریخ
+                                تولد
+                                :</small>
+                        </div>
+                        <div class="details-name-value col-xl-9 col-sm-6"><span>{{ profile.birth_date|date:"Y/n/j" }}</span></div>
+                    </div>
+                </div>
+                <div class="details-mobile details-item">
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-5">
+                            <small class="details-name-title text-muted"><i class="fa fa-mobile-phone ml-2"></i> تلفن
+                                همراه
+                                :</small>
+                        </div>
+                        <div class="details-name-value col-xl-9 col-sm-6"><span>{{ profile.mobile }}</span></div>
+                    </div>
+                </div>
+                <div class="details-mail details-item">
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-5">
+                            <small class="details-name-title text-muted"><i class="fa fa-envelope ml-2"></i>ایمیل
+                                :</small>
+                        </div>
+                        <div class="details-name-value col-xl-9 col-sm-6"><span>{{ profile.user.email }}</span></div>
+                    </div>
+                </div>
+                <div class="details-address details-item">
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-5">
+                            <small class="details-name-title text-muted"><i class="fa fa-home ml-2"></i>آدرس :</small>
+                        </div>
+                        <div class="details-name-value col-xl-9 col-sm-6 item-text-box"><span>{% if profile.address %}{{ profile.address }}{% endif %}</span></div>
+                    </div>
+                </div>
+                <div class="details-bio details-item">
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-5">
+                            <small class="details-name-title text-muted"><i class="fa fa-vcard-o ml-2"></i>بیوگرافی
+                                :</small>
+                        </div>
+                        <div class="details-name-value col-xl-9 col-sm-6"><span></span></div>
+                    </div>
+                </div>
+                {#            <div class="details-balance details-item">#}
+                {#                <div class="col-3">#}
+                {#                    <small class="details-name-title text-muted"><i class="fas fa-coins"> اعتبار :</i></small>#}
+                {#                </div>#}
+                {#                <div class="details-name-value col-5">{{ profile.get_balance_display }}</div>#}
+                {#                <div class="col-4 text-left">#}
+                {#                    <a href="#">#}
+                {#                        <button class="btn btn-success"><i class="fas fa-plus"></i> افزایش اعتبار</button>#}
+                {#                    </a>#}
+                {##}
+                {#                </div>#}
+                {#            </div>#}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
