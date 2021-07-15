@@ -6,16 +6,16 @@ from city.models import Place, Soghat, SOGHAT_CATEGORY, Hotel, HOTEL_RES_CATEGOR
 class AddPlaceForm(forms.ModelForm):
     class Meta:
         model = Place
-        fields = ('name', 'description', 'image')
+        fields = ('name', 'image', 'description')
 
     name = forms.CharField(label='نام', max_length=50,
                            widget=forms.TextInput(
-                               attrs={'class': 'rounded border border-gray-100 bg-gray-100 text-gray-800 w-full mt-4 '
+                               attrs={'class': 'rounded border border-gray-300 text-gray-800 w-full mt-4 '
                                                'mb-8 px-3 py-2 block'}))
 
     description = forms.CharField(label='توضیحات',
                                   widget=forms.Textarea(
-                                      attrs={'class': 'rounded border border-gray-100 w-full bg-gray-100 '
+                                      attrs={'class': 'rounded border border-gray-300 w-full '
                                                       'text-gray-800 mt-4 mb-8 '
                                                       'px-3 py-2 block'}))
     image = forms.CharField(label='عکس', max_length=50,
@@ -30,12 +30,12 @@ class AddSoghatForm(forms.ModelForm):
 
     name = forms.CharField(label='نام', max_length=50,
                            widget=forms.TextInput(
-                               attrs={'class': 'rounded border border-gray-100 bg-gray-100 text-gray-800 w-full mt-4 '
+                               attrs={'class': 'rounded border border-gray-300  text-gray-800 w-full mt-4 '
                                                'mb-8 px-3 py-2 block'}))
 
     description = forms.CharField(label='توضیحات',
                                   widget=forms.Textarea(
-                                      attrs={'class': 'rounded border border-gray-100 w-full bg-gray-100 '
+                                      attrs={'class': 'rounded border border-gray-300 w-full  '
                                                       'text-gray-800 mt-4 mb-8 '
                                                       'px-3 py-2 block'}))
     image = forms.CharField(label='عکس', max_length=50,
@@ -44,8 +44,8 @@ class AddSoghatForm(forms.ModelForm):
 
     sub_category = forms.CharField(label='دسته بندی', max_length=50,
                                    widget=forms.Select(choices=SOGHAT_CATEGORY, attrs={'class': 'rounded border '
-                                                                                                'border-gray-200 mt-4 '
-                                                                                                'mb-8 block bg-gray-100'
+                                                                                                'border-gray-300 mt-4 '
+                                                                                                'mb-8 block '
                                                                                                 ' text-gray-800'}))
 
 
@@ -57,12 +57,12 @@ class AddHotelForm(forms.ModelForm):
     name = forms.CharField(label='نام', max_length=50,
                            widget=forms.TextInput(
                                attrs={
-                                   'class': 'rounded border border-gray-100 bg-gray-100 text-gray-800 w-full mt-4 '
+                                   'class': 'rounded border border-gray-300 text-gray-800 w-full mt-4 '
                                             'mb-8 px-3 py-2 block'}))
 
     description = forms.CharField(label='توضیحات',
                                   widget=forms.Textarea(
-                                      attrs={'class': 'rounded border border-gray-100 w-full bg-gray-100 '
+                                      attrs={'class': 'rounded border border-gray-300 w-full  '
                                                       'text-gray-800 mt-4 mb-8 '
                                                       'px-3 py-2 block'}))
     image = forms.CharField(label='عکس', max_length=50,
@@ -71,15 +71,15 @@ class AddHotelForm(forms.ModelForm):
 
     sub_category = forms.CharField(label='دسته بندی', max_length=50,
                                    widget=forms.Select(choices=HOTEL_RES_CATEGORY,
-                                                       attrs={'class': 'rounded border border-gray-200 mt-4 '
-                                                                       'mb-8 block bg-gray-100 text-gray-800'}))
+                                                       attrs={'class': 'rounded border border-gray-300 mt-4 '
+                                                                       'mb-8 block  text-gray-800'}))
     address = forms.CharField(label='آدرس', max_length=50,
                               widget=forms.Textarea(
-                                  attrs={'class': 'rounded border border-gray-100 bg-gray-100 text-gray-800 w-full '
+                                  attrs={'class': 'rounded border border-gray-300  text-gray-800 w-full '
                                                   'md:w-96 mt-4 mb-8 px-3 py-2 block'}))
     phone = forms.CharField(label='تلفن', max_length=50,
                             widget=forms.TextInput(
-                                attrs={'class': 'rounded border border-gray-100 bg-gray-100 text-gray-800 w-full '
+                                attrs={'class': 'rounded border border-gray-300  text-gray-800 w-full '
                                                 'md:w-96 mt-4 mb-8 px-3 py-2 block'}))
 
 

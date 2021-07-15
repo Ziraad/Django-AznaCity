@@ -5,7 +5,9 @@ module.exports = {
         extend: {
             colors: {
                 primary: '#0099ff',
-                secondary: '#e9ecef',
+                // secondary: '#F5F7FA',
+                secondary: '#57bc90',
+                tertiary: '#219ebc',
                 deepskyblue: '#00bfff'
             },
             fontFamily: {
@@ -19,11 +21,13 @@ module.exports = {
                 128: '512px',
                 144: '576px',
             },
+            opacity: ['disabled'],
             backgroundImage: theme => ({
                 'header-back': "url('../images/wave (2).svg')",
                 'header-back-mobile': "url('../images/oshtrankooh1.jpg')",
                 'footer-back': "url('../images/wave (3).svg')",
-            })
+            }),
+
         },
 
     },

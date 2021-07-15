@@ -126,6 +126,7 @@ def add_sub_cat(request, slug):
         'categorys': categorys,
         'slug': slug,
     }
+    print('slug is: ', slug)
     if request.method == 'POST':
         if slug == 'سوغات':
             add_form = AddSoghatForm(request.POST, request.FILES)
@@ -149,7 +150,8 @@ def add_sub_cat(request, slug):
     else:
         if slug == 'سوغات':
             add_form = AddSoghatForm()
-        elif Q(slug == 'هتل') | Q(slug == 'رستوران'):
+        # elif Q(slug == 'هتل') | Q(slug == 'رستوران'):
+        elif slug == 'هتل' or slug == 'رستوران':
             add_form = AddHotelForm()
         else:
             add_form = AddPlaceForm()

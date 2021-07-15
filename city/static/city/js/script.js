@@ -60,7 +60,7 @@ open.addEventListener('click', () =>{
 // });
 
 // End Fixed Navbar-----------------------------------------------------
-var swiper2 = new Swiper('.swiper-view', {
+var swiper2 = new Swiper('.swiper-tourism', {
 
     breakpoints: {
         480: {
@@ -94,8 +94,125 @@ var swiper2 = new Swiper('.swiper-view', {
     },
     keyboard: true,
     navigation: {
-        nextEl: '.btn-next',
-        prevEl: '.btn-prev',
+        nextEl: '.btn-next-tourism',
+        prevEl: '.btn-prev-tourism',
+    },
+});
+
+var swiper3 = new Swiper('.swiper-hotel', {
+
+    breakpoints: {
+        480: {
+            slidesPerView: 1
+        },
+        640: {
+            slidesPerView: 2,
+            spaceBetween: 30
+        },
+        992: {
+            slidesPerView: 3,
+            spaceBetween: 15
+        },
+        1200: {
+            slidesPerView: 3,
+            spaceBetween: 10
+        },
+        1600: {
+            slidesPerView: 4,
+            spaceBetween: 10
+        },
+    },
+    // slidesPerView: 4,
+    // spaceBetween: 5,
+    // // slidesPerGroup: 3,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    keyboard: true,
+    navigation: {
+        nextEl: '.btn-next-hotel',
+        prevEl: '.btn-prev-hotel',
+    },
+});
+
+var swiper4 = new Swiper('.swiper-soghat', {
+
+    breakpoints: {
+        480: {
+            slidesPerView: 1
+        },
+        640: {
+            slidesPerView: 2,
+            spaceBetween: 30
+        },
+        992: {
+            slidesPerView: 3,
+            spaceBetween: 15
+        },
+        1200: {
+            slidesPerView: 3,
+            spaceBetween: 10
+        },
+        1600: {
+            slidesPerView: 4,
+            spaceBetween: 10
+        },
+    },
+    // slidesPerView: 4,
+    // spaceBetween: 5,
+    // // slidesPerGroup: 3,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    keyboard: true,
+    navigation: {
+        nextEl: '.btn-next-soghat',
+        prevEl: '.btn-prev-soghat',
+    },
+});
+
+var swiper5 = new Swiper('.swiper-factory', {
+
+    breakpoints: {
+        480: {
+            slidesPerView: 1
+        },
+        640: {
+            slidesPerView: 2,
+            spaceBetween: 30
+        },
+        992: {
+            slidesPerView: 3,
+            spaceBetween: 15
+        },
+        1200: {
+            slidesPerView: 3,
+            spaceBetween: 10
+        },
+        1600: {
+            slidesPerView: 4,
+            spaceBetween: 10
+        },
+    },
+    // slidesPerView: 4,
+    // spaceBetween: 5,
+    // // slidesPerGroup: 3,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    keyboard: true,
+    navigation: {
+        nextEl: '.btn-next-factory',
+        prevEl: '.btn-prev-factory',
     },
 });
 // swiper-slider---------------------------------------------------------
