@@ -1,7 +1,7 @@
 {% extends 'city/base.html' %}
 {% load static %}
-{% load jformat %}
-{% load humanize %}
+{#{% load jformat %}#}
+{#{% load humanize %}#}
 {% block extra_headers %}
 
 {% endblock %}
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             {% endif %}
-            {% include 'account/partial/_dashboard.html' %}
+            {% include 'accounts/partial/_dashboard.html' %}
 
             <div class="add-news-container">
                 <div class="title-container justify-content-center">
@@ -38,9 +38,9 @@
     {#        CKEDITOR.replace('text');#}
     {#    </script>#}
     {% block extra_body %}
-        <script src="{% static 'cryptocur/js/slugify.js' %}"></script>
-        <script src="{% static 'cryptocur/js/ckeditor.js' %}"></script>
-        <script src="{% static 'cryptocur/js/add-p.js' %}"></script>
+        <script src="{% static 'city/js/slugify.js' %}"></script>
+        <script src="{% static 'city/js/ckeditor.js' %}"></script>
+        <script src="{% static 'city/js/add-p.js' %}"></script>
     {% endblock %}
 {% endblock %}
 

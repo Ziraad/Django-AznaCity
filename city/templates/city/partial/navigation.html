@@ -6,7 +6,7 @@
         <div class="bar3"></div>
         {#        <button data-toggle="collapse" data-target="#navbarSupportedContent">&times;</button>#}
     </div>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse flex" id="navbarSupportedContent">
         <ul class="navbar-nav navigation-menu text-gray-100 text-sm font-vazir flex p-4">
             <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">
                 <a href="{% url 'city:home_page' %}" class="nav-link">
@@ -21,53 +21,75 @@
                     </a>
                 </li>
             {% endfor %}
-{#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
-{#                <a href="{% url 'city:home_page' %}" class="nav-link"><i class="fa fa-home ml-2"></i> صفحه اصلی</a>#}
-{#            </li>#}
-{#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
-{#                <a href="{% url 'city:unique_slug' slug='گردشگری' %}" class="nav-link"><i#}
-{#                        class="fas fa-umbrella-beach ml-2"></i>گردشگری</a>#}
-{#            </li>#}
-{#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
-{#                <a href="{% url 'city:unique_slug' slug='تاریخی-مذهبی' %}" class="nav-link"><i#}
-{#                        class="fas fa-mosque ml-2"></i>تاریخی-مذهبی</a>#}
-{#            </li>#}
-{#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
-{#                <a href="{% url 'city:unique_slug' slug='کارخانجات' %}" class="nav-link"><i#}
-{#                        class="fa fa-industry ml-2"></i>کارخانجات</a>#}
-{#            </li>#}
-{#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
-{#                <a href="{% url 'city:unique_slug' slug='بزرگان' %}" class="nav-link"><i#}
-{#                        class="fas fa-user-graduate ml-2"></i>بزرگان</a>#}
-{#            </li>#}
-{#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
-{#                <a href="{% url 'city:unique_slug' slug='شهدا' %}" class="nav-link"><i class="fa fa-user ml-2"></i>شهدا</a>#}
-{#            </li>#}
-{#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
-{#                <a href="{% url 'city:unique_slug' slug='هتل' %}" class="nav-link"><i#}
-{#                        class="fa fa-hotel ml-2"></i>هتل</a>#}
-{#            </li>#}
-{#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
-{#                <a href="{% url 'city:unique_slug' slug='رستوران' %}" class="nav-link flex">#}
-{#                    <i class="fa fa-cutlery ml-2"></i>#}
-{#                    <img class="text-white" src="../../../../media/categorys/icon/eating.png" alt="eating">#}
-{#                    رستوران#}
-{#                </a>#}
-{#            </li>#}
-{#             <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
-{#                <a href="{% url 'city:unique_slug' slug='ازناگردی' %}" class="nav-link"><i#}
-{#                        class="fa fa-city ml-2"></i>ازناگردی</a>#}
-{#            </li>#}
-{#             <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
-{#                <a href="{% url 'city:unique_slug' slug='اخبار-و-مقالات' %}" class="nav-link"><i#}
-{#                        class="fa fa-blog ml-2"></i>اخبار و مقالات</a>#}
-{#            </li>#}
+            {#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
+            {#                <a href="{% url 'city:home_page' %}" class="nav-link"><i class="fa fa-home ml-2"></i> صفحه اصلی</a>#}
+            {#            </li>#}
+            {#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
+            {#                <a href="{% url 'city:unique_slug' slug='گردشگری' %}" class="nav-link"><i#}
+            {#                        class="fas fa-umbrella-beach ml-2"></i>گردشگری</a>#}
+            {#            </li>#}
+            {#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
+            {#                <a href="{% url 'city:unique_slug' slug='تاریخی-مذهبی' %}" class="nav-link"><i#}
+            {#                        class="fas fa-mosque ml-2"></i>تاریخی-مذهبی</a>#}
+            {#            </li>#}
+            {#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
+            {#                <a href="{% url 'city:unique_slug' slug='کارخانجات' %}" class="nav-link"><i#}
+            {#                        class="fa fa-industry ml-2"></i>کارخانجات</a>#}
+            {#            </li>#}
+            {#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
+            {#                <a href="{% url 'city:unique_slug' slug='بزرگان' %}" class="nav-link"><i#}
+            {#                        class="fas fa-user-graduate ml-2"></i>بزرگان</a>#}
+            {#            </li>#}
+            {#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
+            {#                <a href="{% url 'city:unique_slug' slug='شهدا' %}" class="nav-link"><i class="fa fa-user ml-2"></i>شهدا</a>#}
+            {#            </li>#}
+            {#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
+            {#                <a href="{% url 'city:unique_slug' slug='هتل' %}" class="nav-link"><i#}
+            {#                        class="fa fa-hotel ml-2"></i>هتل</a>#}
+            {#            </li>#}
+            {#            <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
+            {#                <a href="{% url 'city:unique_slug' slug='رستوران' %}" class="nav-link flex">#}
+            {#                    <i class="fa fa-cutlery ml-2"></i>#}
+            {#                    <img class="text-white" src="../../../../media/categorys/icon/eating.png" alt="eating">#}
+            {#                    رستوران#}
+            {#                </a>#}
+            {#            </li>#}
+            {#             <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
+            {#                <a href="{% url 'city:unique_slug' slug='ازناگردی' %}" class="nav-link"><i#}
+            {#                        class="fa fa-city ml-2"></i>ازناگردی</a>#}
+            {#            </li>#}
+            {#             <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">#}
+            {#                <a href="{% url 'city:unique_slug' slug='اخبار-و-مقالات' %}" class="nav-link"><i#}
+            {#                        class="fa fa-blog ml-2"></i>اخبار و مقالات</a>#}
+            {#            </li>#}
             <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">
                 <a href="" class="nav-link"><i class="fa fa-info-circle ml-2"></i>درباره ما</a>
             </li>
             <li class="nav-item mr-8 border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">
                 <a href="" class="nav-link"><i class="fa fa-phone-square ml-2"></i>ارتباط با ما</a>
             </li>
+
+
         </ul>
+        <div class="mr-auto ml-4">
+            <ul class="text-gray-100 text-sm font-vazir flex gap-2 p-4">
+                {% if user.is_authenticated %}
+                    <li class="nav-item border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">
+                        <a class="" href="{% url 'accounts:profile_details' %}"><i class="fa fa-user ml-2"></i>{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">
+                        <a href="{% url 'accounts:logout' %}" class="nav-link"><i class="fa fa-sign-out ml-2"></i>خروج</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">
+                        <a href="{% url 'accounts:login' %}" class="nav-link"><i class="fa fa-user ml-2"></i>ورود</a>
+                    </li>
+                    <li class="nav-item border-b-4 border-transparent transition ease-in-out duration-300 py-1 hover:border-yellow-400 hover:text-gray-800">
+                        <a href="{% url 'accounts:register_user' %}" class="nav-link">ثبت نام</a>
+                    </li>
+                    </ul>
+                {% endif %}
+        </div>
     </div>
+
 </nav>

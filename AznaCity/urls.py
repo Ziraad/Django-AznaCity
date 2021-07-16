@@ -21,10 +21,10 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('city.urls')),
+    path('accounts/', include('accounts.urls')),
     # Third-Party urls
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
-
 ]
-
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

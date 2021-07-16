@@ -1,5 +1,6 @@
 from itertools import chain
 
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
@@ -121,6 +122,7 @@ def category(request, slug):
     return render(request, 'city/category.html', context=context)
 
 
+@login_required
 def add_sub_cat(request, slug):
     context = {
         'categorys': categorys,

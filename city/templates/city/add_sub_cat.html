@@ -6,12 +6,12 @@
 
     <main class="main-container md:max-w-screen-lg mx-auto px-2 my-8 font-vazir">
         <div class="border border-gray-200 rounded bg-white text-gray-700">
-            <div class="border-b bg-secondary text-gray-800 border-gray-200 p-4 font-bold"><span>اضافه کردن به {{ slug }}</span></div>
+            <div class="border-b bg-gray-200 text-gray-800 border-gray-200 p-4 font-bold"><span>اضافه کردن به {{ slug }}</span></div>
             <form action="" method="post" class="flex flex-col gap-8 p-4  " enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ add_form.as_p }}
                 {{ add_form.media }}
-                <div class="flex justify-end "><button type="submit" class="w-32 h-10 my-8 font-bold bg-secondary text-gray-800 rounded hover:shadow transition ease-in-out duration-200">ثبت</button></div>
+                <div class="flex justify-end "><button type="submit" class="w-32 h-10 my-8 font-bold bg-primary text-gray-100 rounded hover:shadow transition ease-in-out duration-200">ثبت</button></div>
             </form>
             {% if error_form %}
                 <div class="w-1/2 flex justify-center p-4 bg-green-500"><span>{{ error_form }}</span></div>

@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+MALE = 1
+FEMALE = 2
+GENDER_CHOICES = ((MALE, 'مرد'), (FEMALE, 'زن'))
+
 
 class Profile(models.Model):
     """
@@ -17,9 +21,6 @@ class Profile(models.Model):
 
     mobile = models.CharField('تلفن همراه', max_length=11)
 
-    MALE = 1
-    FEMALE = 2
-    GENDER_CHOICES = ((MALE, 'مرد'), (FEMALE, 'زن'))
     gender = models.IntegerField('جنسیت', choices=GENDER_CHOICES, null=True, blank=True)
 
     birth_date = models.DateField('تاریخ تولد', null=True, blank=True)
@@ -27,7 +28,10 @@ class Profile(models.Model):
     profile_image = models.ImageField('تصویر', upload_to='users/profile_images/', null=True, blank=True)
 
     def __str__(self):
-        return self.user.get_full_name()
+        if self.user.get_full_name():
+            return self.user.get_full_name()
+        else:
+            return self.user.username
 
 #
 # class NewsLetter(models.Model):

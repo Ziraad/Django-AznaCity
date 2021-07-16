@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -9,13 +8,14 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib import messages
 
-# from .forms import PostForm, MyUserForm, ProfileForm
+from news.models import News
+from .forms import MyUserForm, ProfileForm, PostForm
 from .models import Profile
 from city.models import Category
 
 # -*- coding: utf-8 -*-
 
-category = Category.objects.all
+categorys = Category.objects.all
 
 
 def login_view(request):
@@ -30,12 +30,12 @@ def login_view(request):
         if user is not None:
             # Successful login
             login(request, user)
-            redirect_url = next_url if next_url else reverse('cryptocur:home_page')
+            redirect_url = next_url if next_url else reverse('city:home_page')
             return HttpResponseRedirect(redirect_url)
         else:
             # undefined user or wrong password
             context = {
-                'category': category,
+                'categorys': categorys,
 
                 'username': username,
                 # 'search_form': search_form,
@@ -44,7 +44,7 @@ def login_view(request):
     else:
         print('request is get')
         context = {
-            'category': category,
+            'categorys': categorys,
 
             # 'search_form': search_form,
         }
@@ -54,7 +54,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('cryptocur:home_page'))
+    return HttpResponseRedirect(reverse('city:home_page'))
 
 
 @login_required
@@ -62,24 +62,30 @@ def profile_details(request):
     profile = request.user.profile
     # search_form = SearchForm(data=request.GET)
     context = {
-        'category': category,
+        'categorys': categorys,
 
         # 'search_form': search_form,
         'profile': profile,
     }
     # search_form_method(request, context)
-    return render(request, 'account/profile_details.html', context)
+    return render(request, 'accounts/profile_details.html', context)
 
 
 @login_required
 def profile_edit(request):
+    profile = request.user.profile
     if request.method == 'POST':
         user_form = MyUserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, files=request.FILES, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            return HttpResponseRedirect(reverse('accounts:profile_details'))
+            try:
+                user_form.save()
+                profile_form.save()
+                return HttpResponseRedirect(reverse('accounts:profile_details'))
+            except Exception as e:
+                print('form is invalid ...', str(e))
+        else:
+            print('error ...')
     else:
         user_form = MyUserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
@@ -88,37 +94,39 @@ def profile_edit(request):
     context = {
         'user_form': user_form,
         'profile_form': profile_form,
+        'profile': profile,
         # 'search_form': search_form,
-        'category': category,
+        'categorys': categorys,
 
     }
-    search_form_method(request, context)
-    return render(request, 'account/profile_edit.html', context)
+    # search_form_method(request, context)
+    return render(request, 'accounts/profile_edit.html', context)
 
 
 def register_user(request):
     # search_form = SearchForm(data=request.GET)
     context = {
-        'category': category,
+        'categorys': categorys,
 
         # 'search_form': search_form,
     }
     # search_form_method(request, context)
     if request.method == 'POST':
         try:
-            f_name = request.POST.get('f_name')
-            l_name = request.POST.get('l_name')
-            email = request.POST.get('email')
+            # f_name = request.POST.get('f_name')
+            # l_name = request.POST.get('l_name')
+            # email = request.POST.get('email')
             mobile = request.POST.get('mobile')
             # gender = request.POST.get('gender')
             username = request.POST.get('username')
             password = request.POST.get('password')
-            user = User.objects.create_user(username=username, password=password, email=email, first_name=f_name,
-                                            last_name=l_name)
+            user = User.objects.create_user(username=username, password=password)
             Profile.objects.create(user=user, mobile=mobile)
+            context['message_in_register'] = 'حساب کابری شما با موفقیت ثبت شد'
         except Exception as e:
-            context['error_in_register'] = 'لطفاً اطلاعات خواسته شده را به درستی وارد نمایید'
-    return render(request, 'account/register_form.html', context=context)
+            print('error in register: ', str(e))
+            context['message_in_register'] = 'لطفاً اطلاعات خواسته شده را به درستی وارد نمایید.'
+    return render(request, 'accounts/register_form.html', context=context)
 
 
 @login_required()
@@ -129,13 +137,13 @@ def post_list(request):
 
     context = {
         'post': post,
-        'category': category,
+        'categorys': categorys,
 
         # 'search_form': search_form,
     }
     # search_form_method(request, context)
 
-    return render(request, 'account/post_list_page.html', context=context)
+    return render(request, 'accounts/post_list_page.html', context=context)
 
 
 @login_required()
@@ -143,7 +151,7 @@ def add_post_view(request):
     # search_form = SearchForm(data=request.GET)
 
     context = {
-        'category': category,
+        'categorys': categorys,
 
         # 'search_form': search_form,
     }
@@ -179,7 +187,7 @@ def add_post_view(request):
 
     # search_form_method(request, context)
 
-    return render(request, 'account/add_post_page.html', context=context)
+    return render(request, 'accounts/add_post_page.html', context=context)
 
 
 @login_required()
@@ -190,7 +198,7 @@ def post_edit(request, slug):
     context = {
         'instance': instance,
         # 'search_form': search_form,
-        'category': category,
+        'categorys': categorys,
 
     }
     if request.method == 'POST':
@@ -209,4 +217,4 @@ def post_edit(request, slug):
 
     # search_form_method(request, context)
 
-    return render(request, 'account/post_edit.html', context)
+    return render(request, 'accounts/post_edit.html', context)

@@ -1,45 +1,45 @@
 {% extends 'city/base.html' %}
 {% load static %}
-{% load jformat %}
-{% load humanize %}
+{#{% load jformat %}#}
+{#{% load humanize %}#}
 {% block extra_headers %}
 {% endblock %}
 {% block title %}ورود کاربر {{ super }}{% endblock %}
 {% block body %}
     <div class="login-page-container">
-        <div class="container-form">
-            <div class="container-form-login">
-                <form action="" method="post" name="frm_login" class="form-login">
+        <div class="container-form mx-auto font-vazir md:max-w-screen-lg px-4 md:px-2 my-8 flex justify-center">
+            <div class="container-form-login w-96">
+                <form action="" method="post" name="frm_login" class="form-login shadow bg-white rounded-lg p-4">
                     {% csrf_token %}
-                    <h5 class="title-form">ورود به حساب کاربری</h5>
-                    <img src="{% static 'cryptocur/images/login.png' %}" alt="ورود به حساب کاربری">
+                    <h5 class="title-form text-center my-4">ورود به حساب کاربری</h5>
+                    <img class="w-64 h-64 mx-auto my-8 flex justify-center" src="{% static 'city/images/login.png' %}" alt="ورود به حساب کاربری">
                     {% if login_error %}
                         <div class="alert alert-danger text-center">
                             {{ login_error }}
                         </div>
                     {% endif %}
-                    <div class="tamasha">
-                        <i class="fa fa-address-card phone-icon"></i>
-                        <input type="text" name="username" class="form-control pr-5" placeholder="نام کاربری">
+                    <div class="tamasha w-full border border-gray-400 my-4 rounded bg-white overflow-hidden flex">
+                        <i class="fa fa-address-card phone-icon text-gray-300 p-2"></i>
+                        <input type="text" name="username" class="form-control text-xs p-2 w-full h-full border-0 focus:border-0" placeholder="نام کاربری">
                     </div>
-                    <div class="tamasha">
-                        <i class="fa fa-key phone-icon"></i>
-                        <input type="password" name="password" class="form-control pr-5" placeholder="گذرواژه">
+                    <div class="tamasha w-full border border-gray-400 my-4 rounded overflow-hidden flex">
+                        <i class="fa fa-key phone-icon text-gray-300 p-2"></i>
+                        <input type="password" name="password" class="form-control text-xs p-2  w-full h-full focus:border-opacity-0" placeholder="گذرواژه">
                     </div>
 
-                    <div class="form-group remember-me text-right mr-3">
+                    <div class="form-group remember-me text-right">
                         <input type="checkbox" class="checkbox-input ml-2">
-                        <label for="form-check-label ">مرا به خاطر بسپار</label>
+                        <label class="text-sm text-gray-600" for="form-check-label ">مرا به خاطر بسپار</label>
                     </div>
 
-                    <div class="button-submit col-12 pl-0">
-                        <button type="submit" class="btn btn-primary w-25 ">ورود</button>
+                    <div class="button-submit flex justify-end my-8">
+                        <button type="submit" class="btn btn-primary w-32 h-8 rounded bg-primary text-white hover:shadow transition ease-in duration-150">ورود</button>
                     </div>
 
-                    <div class="other-link text-right">
-                        <a href="{% url 'accounts:register_user' %}"><i class="fa fa-user-plus pl-2"
-                                                                        style="font-size: 20px;"></i>ثبت نام</a>
-                        <a href="#"><i class="fas fa-lock-open pl-2" style="font-size: 20px;"></i>رمز عبور خود را فراموش
+                    <div class="other-link text-right text-sm flex flex-col text-gray-600 gap-4">
+                        <a class="hover:text-gray-800 transition ease-in duration-150" href="{% url 'accounts:register_user' %}"><i class="fa fa-user-plus pl-2"
+                                                                        ></i>ثبت نام</a>
+                        <a class="hover:text-gray-800 transition ease-in duration-150" href="#"><i class="fas fa-lock-open pl-2"></i>رمز عبور خود را فراموش
                             کرده ام !</a>
                     </div>
 

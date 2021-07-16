@@ -1,8 +1,8 @@
 {#{% extends 'cryptocur/base_page.html' %}#}
 {% extends 'city/base.html' %}
 {% load static %}
-{% load jformat %}
-{% load humanize %}
+{#{% load jformat %}#}
+{#{% load humanize %}#}
 {% block extra_headers %}
 {% endblock %}
 {% block title %}پست های من{{ super }}{% endblock %}
@@ -10,7 +10,7 @@
 {% block body %}
     <div class="news-list-page cryptoi-container">
         <div class="profile-detail-container">
-            {% include 'account/partial/_dashboard.html' %}
+            {% include 'accounts/partial/_dashboard.html' %}
             <div class="news-list-container">
                 <div class="news-title-container justify-content-center">
                     <h4 class="title text-right">لیست پست های من</h4>

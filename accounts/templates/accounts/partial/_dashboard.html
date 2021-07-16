@@ -1,33 +1,51 @@
 {% load static %}
-<div class="dashboard-container">
-    <div class="details-image-container text-center">
-        {% if profile.profile_image %}
-            <img src="{{ profile.profile_image.url }}" alt="{{ profile.user.get_full_name }}"
-                 class="profile-image">
-        {% else %}
-            <img src="{% static 'cryptocur/images/profile-image.png' %}"
-                 alt="{{ profile.user.get_full_name }}" class="profile-image">
+<div class="dashboard-container col-span-3 md:col-span-1 border rounded bg-white">
+    <div class="details-image-container border-b bg-gray-200">
+        <div class="flex justify-center p-4">
+            {% if profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" alt="{{ profile.user.username }}"
+                     class="profile-image w-32 h-32 rounded-full">
+            {% else %}
+                <img src="{% static 'city/images/profile-image.png' %}"
+                     alt="{{ profile.user.username }}" class="profile-image w-32 h-32 rounded-full">
+            {% endif %}
+        </div>
+        <div class="text-center font-vazir font-bold text-gray-800 px-2 py-4"><span>{{ user.username }}</span></div>
+        {% if user.get_full_name %}
+            <div class="text-center font-vazir font-bold text-gray-800 px-2 pb-4"><span>{{ user.get_full_name }}</span>
+            </div>
         {% endif %}
     </div>
-    <div class="text-center"><span>{{ user.username }}</span></div>
-    <hr>
-    {% if user.is_staff %}
-        <div class="details-work-container dash-item">
 
-            <ul class="item-list">
-                <li class="add-item"><a class="add-new-item add-news" href="{% url 'accounts:add_post_view' %}">اضافه
-                    کردن پست</a></li>
-                <li class="add-item"><a class="add-new-item add-article" href="{% url 'accounts:post_list' %}">پست های
-                    من</a></li>
-            </ul>
-        </div>
-    {% endif %}
-    <div class="profile-button text-center">
-        <a href="{% url 'accounts:profile_edit' %}">
-            <button class="btn btn-dark"><i class="fa fa-edit ml-2"></i> ویرایش نمایه</button>
-        </a>
-        <a href="#">
-            <button class="btn btn-warning"><i class="fa fa-key ml-2"></i> تغییر گذرواژه</button>
-        </a>
+    <div class="details-work-container dash-item font-vazir text-sm p-4">
+        <ul class="item-list">
+            <li class="mb-4">
+                <a href="{% url 'accounts:profile_details' %}"><i class="fa fa-edit text-gray-500 ml-2"></i>داشبورد</a>
+            </li>
+            {% if user.is_staff %}
+                <li class="add-item mb-4">
+                    <a class="add-new-item add-news" href="{% url 'accounts:add_post_view' %}"><i
+                            class="fa fa-plus text-gray-500 ml-2"></i>اضافه کردن پست</a>
+                </li>
+                <li class="add-item mb-4"><a class="add-new-item add-article" href="{% url 'accounts:post_list' %}"><i
+                        class="fa fa-list-alt text-gray-500 ml-2"></i>پست های
+                    من</a>
+                </li>
+            {% endif %}
+            <li class="mb-4">
+                <a href="{% url 'accounts:profile_edit' %}"><i class="fa fa-edit text-gray-500 ml-2"></i>ویرایش
+                    نمایه</a>
+            </li>
+            <li class="mb-4">
+                <a href="#"><i class="fa fa-key text-gray-500 ml-2"></i>تغییر گذرواژه</a>
+            </li>
+
+        </ul>
     </div>
+
+    {#    <div class="profile-button text-right font-vazir flex flex-col gap-4 p-4">#}
+    {#        <div>#}
+    {#        </div>#}
+    {#        <div></div>#}
+    {#    </div>#}
 </div>
